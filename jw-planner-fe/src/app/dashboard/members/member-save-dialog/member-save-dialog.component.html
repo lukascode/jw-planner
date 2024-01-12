@@ -1,0 +1,55 @@
+<h2 mat-dialog-title>{{ (memberId ? 'edit_member' : 'add_member') | translate }}</h2>
+<mat-dialog-content>
+<form [formGroup]="memberSaveForm" (keyup.enter)="save()" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="2em">
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap=".75em">
+        <mat-form-field>
+            <mat-label>{{'first_name' | translate }}<span class="required">*</span></mat-label>
+            <input matInput type="text" formControlName="firstName">
+            <mat-error *ngIf="memberSaveForm.controls.firstName.hasError('required')">{{ 'field_required' | translate }}</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>{{'last_name' | translate }}<span class="required">*</span></mat-label>
+            <input matInput type="text" formControlName="lastName">
+            <mat-error *ngIf="memberSaveForm.controls.lastName.hasError('required')">{{ 'field_required' | translate }}</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>{{'gender' | translate}}<span class="required">*</span></mat-label>
+            <mat-select name="gender" formControlName="gender">
+                <mat-option value="MALE">{{'male' | translate}}</mat-option>
+                <mat-option value="FEMALE">{{'female' | translate}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap=".75em">
+        <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input matInput type="text" formControlName="email">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>{{'phone_number' | translate}}</mat-label>
+            <input matInput type="text" formControlName="phoneNumber">
+        </mat-form-field>
+    </div>
+    <mat-form-field>
+        <mat-label>{{'address' | translate}}</mat-label>
+        <input matInput type="text" formControlName="address">
+    </mat-form-field>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap=".75em">
+        <mat-form-field fxFlex="75">
+            <mat-label>{{'responsibilities' | translate}}</mat-label>
+            <mat-select name="responsibilities" formControlName="responsibilities" multiple>
+                <mat-option *ngFor="let r of (responsibilities | async)" [value]="r.split(':')[0]">{{r.split(':')[1]}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-slide-toggle fxFlex="25" name="external" checked="false" formControlName="external">{{'external' | translate}}</mat-slide-toggle>
+    </div>
+    <mat-form-field>
+        <mat-label>{{'additional_information' | translate}}</mat-label>
+        <textarea matInput formControlName="additionalInformation"></textarea>
+    </mat-form-field>
+</form>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+    <button mat-raised-button mat-dialog-close>{{'cancel' | translate}}</button>
+    <button mat-raised-button color="primary" (click)="save()" [disabled]="!memberSaveForm.valid || !memberSaveForm.touched">{{'save' | translate}}</button>
+</mat-dialog-actions>

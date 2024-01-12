@@ -1,0 +1,59 @@
+<div class="main-nav-container">
+    <div class="header mat-elevation-z6">
+      <mat-toolbar class="toolbar" color="primary">
+        <a href="#" fxLayout="row" fxLayoutAlign="center center">
+          <mat-icon class="logo-icon">account_balance</mat-icon>
+          <span class="logo-header">JW.Planner</span>
+        </a>
+        <span class="toolbar-spacer"></span>
+        <button fxHide [fxShow.lt-md]="true" mat-icon-button class="toggle-nav-button" (click)="toggleMobileNav()">
+          <mat-icon>{{ mobileNavHidden ? 'menu' : 'close' }}</mat-icon>
+        </button>
+        <button mat-button>v{{appVersion }}</button>
+        <button mat-icon-button aria-label="Night mode" (click)="toggleDarkMode()">
+          <mat-icon>mode_night</mat-icon>
+        </button>
+        <button mat-button aria-label="User profile" [matMenuTriggerFor]="userProfileMenu">
+          <mat-icon>person</mat-icon>
+          {{ email }}
+        </button>
+        <mat-menu #userProfileMenu="matMenu">
+          <button mat-menu-item>Ustawienia</button>
+          <button mat-menu-item (click)="logout()">Wyloguj</button>
+        </mat-menu>
+      </mat-toolbar>
+    </div>
+  
+    <ng-template #navigation>
+      <mat-nav-list>
+        <a mat-list-item routerLink="home">Strona główna</a>
+        <a mat-list-item routerLink="members">Uczestnicy</a>
+        <a mat-list-item routerLink="groups">Grupy</a>
+      </mat-nav-list>
+    </ng-template>
+  
+    <div *ngIf="!mobileNavHidden" fxHide [fxShow.lt-md]="true" [ngClass.lt-md]="'mobile-navigation'" [@mobileNavInOut]>
+      <ng-container *ngTemplateOutlet="navigation"></ng-container>
+    </div>
+  
+    <div class="content-container">
+      <div fxHide [fxShow.md]="true" [fxShow.gt-md]="true" [ngClass.md]="'desktop-navigation'"
+           [ngClass.gt-md]="'desktop-navigation'" class="mat-elevation-z8">
+        <ng-container *ngTemplateOutlet="navigation"></ng-container>
+      </div>
+      <div class="main-content" [ngClass.md]="'desktop-main-content'" [ngClass.gt-md]="'desktop-main-content'">
+        <!-- page content -->
+  
+        <router-outlet></router-outlet>
+  
+        <!-- page content -->
+      </div>
+      <div class="footer">
+        <mat-toolbar color="primary">
+          <img src="assets/angular.svg" alt="Angular icon" width="44" height="44">&nbsp;Powered by Angular
+        </mat-toolbar>
+      </div>
+    </div>
+  
+  </div>
+  

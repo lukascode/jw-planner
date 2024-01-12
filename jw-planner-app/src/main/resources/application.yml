@@ -1,0 +1,38 @@
+app:
+  version: 0.0.1
+
+server:
+  port: 8081
+  servlet:
+    session:
+      timeout: 60m
+      cookie:
+        http-only: true
+        secure: false
+
+spring:
+  session:
+    store-type: jdbc
+    jdbc:
+      schema: classpath:org/springframework/session/jdbc/schema-mysql.sql
+      table-name: SPRING_SESSION
+      initialize-schema: always
+  datasource:
+    url: jdbc:mysql://localhost:3306/jwplannerdb?allowPublicKeyRetrieval=true&useSSL=false
+    username: jw
+    password: jw
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQLDialect
+
+logging:
+  level:
+    org:
+      springframework:
+        web: DEBUG
+        security:
+          web: TRACE
