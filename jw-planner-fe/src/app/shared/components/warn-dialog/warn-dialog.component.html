@@ -1,0 +1,11 @@
+<h2 mat-dialog-title fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="2em">
+  <mat-icon>warning</mat-icon>
+  {{'warning' | translate}}
+</h2>
+<mat-dialog-content align="center">
+<p>{{msg}}</p>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+  <button mat-raised-button [mat-dialog-close]="false">{{'no' | translate}}</button>
+  <button mat-raised-button color="warn" [mat-dialog-close]="true">{{'yes' | translate}}</button>
+</mat-dialog-actions>
