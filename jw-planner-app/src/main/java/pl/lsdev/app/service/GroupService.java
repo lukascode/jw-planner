@@ -42,13 +42,14 @@ public class GroupService {
     }
 
     @Transactional
-    public void updateGroup(GroupSaveRequest request, long groupId) {
+    public Long updateGroup(GroupSaveRequest request, long groupId) {
         log.debug("Updating group {id: {}}", groupId);
         Group group = findGroup(groupId);
         Member member = memberService.findMember(request.getSupervisorId());
         group.setName(request.getName());
         group.setSupervisor(member);
         log.info("Group updated successfully {id: {}}", group.getId());
+        return group.getId();
     }
 
     @Transactional

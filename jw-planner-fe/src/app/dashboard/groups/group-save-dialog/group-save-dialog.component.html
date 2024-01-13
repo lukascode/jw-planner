@@ -1,0 +1,20 @@
+<h2 mat-dialog-title>{{ (groupId ? 'edit_group' : 'add_group') | translate }}</h2>
+<mat-dialog-content>
+  <form [formGroup]="groupSaveForm" (keyup.enter)="save()" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="2em">
+    <mat-form-field>
+      <mat-label>{{'group_name' | translate }}<span class="required">*</span></mat-label>
+      <input matInput type="text" formControlName="name">
+      <mat-error *ngIf="groupSaveForm.controls.name.hasError('required')">{{ 'field_required' | translate }}</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>{{'group_supervisor' | translate}}<span class="required">*</span></mat-label>
+      <mat-select name="supervisorId" formControlName="supervisorId">
+        <mat-option *ngFor="let m of (members | async)" [value]="m.id">{{m.firstName + ' ' + m.lastName}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+  <button mat-raised-button mat-dialog-close>{{'cancel' | translate}}</button>
+  <button mat-raised-button color="primary" (click)="save()" [disabled]="!groupSaveForm.valid">{{'save' | translate}}</button>
+</mat-dialog-actions>

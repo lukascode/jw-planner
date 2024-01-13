@@ -30,8 +30,8 @@ public class GroupController {
     }
 
     @PutMapping("/{groupId}")
-    public void updateGroup(@PathVariable("groupId") long groupId, @Valid @RequestBody GroupSaveRequest request) {
-        groupService.updateGroup(request, groupId);
+    public Long updateGroup(@PathVariable("groupId") long groupId, @Valid @RequestBody GroupSaveRequest request) {
+        return groupService.updateGroup(request, groupId);
     }
 
     @DeleteMapping("/{groupId}")

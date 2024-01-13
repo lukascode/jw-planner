@@ -4,8 +4,8 @@ import {MemberSaveDialogComponent} from '../member-save-dialog/member-save-dialo
 import {MemberSnapshot} from '../members.model';
 import {BehaviorSubject, Subject} from 'rxjs';
 import {MemberService} from '../members.service';
-import {WarnDialogComponent} from "../../../shared/components/warn-dialog/warn-dialog.component";
-import {AlertService} from "ngx-alerts";
+import {WarnDialogComponent} from '../../../shared/components/warn-dialog/warn-dialog.component';
+import {AlertService} from 'ngx-alerts';
 
 @Component({
   selector: 'app-members',
@@ -34,7 +34,7 @@ export class MembersComponent implements OnInit {
   }
 
   delete(id: number) {
-    WarnDialogComponent.open(this.dialog, 'Czy jesteś pewny, że chcesz zrealizować tą operację?').subscribe(result => {
+    WarnDialogComponent.open(this.dialog, 'Czy jesteś pewny, że chcesz zrealizować tę operację?').subscribe(result => {
       if (result) {
         this.memberService.deleteMember(id).subscribe(() => {
           this.alert.success('Zapisano pomyślnie');

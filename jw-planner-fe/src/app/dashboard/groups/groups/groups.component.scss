@@ -1,0 +1,27 @@
+mat-table {
+  .mat-column-actions {
+    max-width: 64px;
+  }
+
+  mat-row {
+    .actions {
+      mat-icon {
+        cursor: pointer;
+        opacity: 0.5;
+        display: none;
+      }
+    }
+
+    &:hover {
+      .actions {
+        mat-icon {
+          display: block;
+        }
+
+        mat-icon:hover {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}

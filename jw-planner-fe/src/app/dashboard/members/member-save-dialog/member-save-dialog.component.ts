@@ -16,7 +16,7 @@ export class MemberSaveDialogComponent implements OnInit {
 
   memberId?: number;
   memberSaveForm: FormGroup;
-  responsibilities: Observable<string>;
+  responsibilities: Observable<string[]>;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) data: {memberId?: number},
