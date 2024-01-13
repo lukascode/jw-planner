@@ -10,6 +10,7 @@
     "sign_out": "Wyloguj",
     "add_member": "Dodaj uczestnika",
     "edit_member": "Edytuj uczestnika",
+    "name": "Nazwisko",
     "first_name": "Imię",
     "last_name": "Nazwisko",
     "email": "Email",
@@ -22,5 +23,8 @@
     "cancel": "Anuluj",
     "save": "Zapisz",
     "external": "Przyjezdny",
-    "responsibilities": "Role"
+    "responsibilities": "Role",
+    "warning": "Ostrzeżenie",
+    "yes": "Tak",
+    "no": "Nie"
 }

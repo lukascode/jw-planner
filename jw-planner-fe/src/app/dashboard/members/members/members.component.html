@@ -1,1 +1,37 @@
-<button mat-button (click)="openDialog()">Add member</button>
+<button mat-raised-button (click)="add()" color="accent">{{'add_member' | translate}}</button>
+
+<div style="margin:1em"></div>
+
+<mat-table [dataSource]="members" class="mat-elevation-z1">
+
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef>{{'name' | translate}}</mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.firstName + ' ' + element.lastName}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="email">
+    <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="phoneNumber">
+    <mat-header-cell *matHeaderCellDef>{{'phone_number' | translate}}</mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.phoneNumber}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="responsibilities">
+    <mat-header-cell *matHeaderCellDef>{{'responsibilities' | translate}}</mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{prepareResponsibilities(element.responsibilities)}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+    <mat-cell *matCellDef="let element" class="actions">
+      <mat-icon (click)="edit(element.id)">edit</mat-icon>
+      <mat-icon (click)="delete(element.id)">clear</mat-icon>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

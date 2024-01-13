@@ -20,7 +20,7 @@ export class MemberSaveDialogComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) data: {memberId?: number},
-    private memberService: MemberService, 
+    private memberService: MemberService,
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<MemberSaveDialogComponent>,
     private alert: AlertService) {
@@ -67,9 +67,8 @@ export class MemberSaveDialogComponent implements OnInit {
 
   save() {
     this.memberService.saveMember(this.memberSaveForm.value, this.memberId)
-    .pipe(finalize(() => this.dialogRef.close()))
     .subscribe(id => {
-      console.log("member saved", id);
+      this.dialogRef.close(id);
       this.alert.success('Zapisano pomyślnie');
     });
   }

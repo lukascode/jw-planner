@@ -32,8 +32,8 @@ export class MainNavComponent implements AfterViewChecked {
   appVersion: string;
 
   constructor(
-    private cdr: ChangeDetectorRef, 
-    private renderer: Renderer2, 
+    private cdr: ChangeDetectorRef,
+    private renderer: Renderer2,
     private auth: AuthService,
     private router: Router) {
       const userDetails = JSON.parse(localStorage.getItem('userDetails') as string);
@@ -63,8 +63,8 @@ export class MainNavComponent implements AfterViewChecked {
 
   logout() {
     this.auth.logout().subscribe(() => {
-      console.log("Logged out successfully");
-      this.router.navigate(['/public/login'])
+      console.log('Logged out successfully');
+      this.router.navigate(['/public/login']);
     });
   }
 

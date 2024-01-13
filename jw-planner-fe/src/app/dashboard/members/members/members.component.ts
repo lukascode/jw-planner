@@ -1,6 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
-import {MemberSaveDialogComponent} from '../member-save-dialog/member-save-dialog.component'
+import {MemberSaveDialogComponent} from '../member-save-dialog/member-save-dialog.component';
+import {MemberSnapshot} from '../members.model';
+import {BehaviorSubject, Subject} from 'rxjs';
+import {MemberService} from '../members.service';
+import {WarnDialogComponent} from "../../../shared/components/warn-dialog/warn-dialog.component";
+import {AlertService} from "ngx-alerts";
 
 @Component({
   selector: 'app-members',
@@ -9,15 +14,51 @@ import {MemberSaveDialogComponent} from '../member-save-dialog/member-save-dialo
 })
 export class MembersComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) { }
+  displayedColumns: string[] = ['name', 'email', 'phoneNumber', 'responsibilities', 'actions'];
+  members: Subject<MemberSnapshot[]> = new BehaviorSubject<MemberSnapshot[]>([]);
 
-  ngOnInit(): void {
+  constructor(public dialog: MatDialog,
+              private memberService: MemberService,
+              private alert: AlertService) { }
+
+  ngOnInit() {
+    this.fetchData();
   }
 
-  openDialog() {
-    const dialogRef = this.dialog.open(MemberSaveDialogComponent, {minWidth: '720px', data: {memberId: 4}});
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog closed`);
+  add() {
+    this.openSaveDialog();
+  }
+
+  edit(id: number) {
+    this.openSaveDialog(id);
+  }
+
+  delete(id: number) {
+    WarnDialogComponent.open(this.dialog, 'Czy jesteś pewny, że chcesz zrealizować tą operację?').subscribe(result => {
+      if (result) {
+        this.memberService.deleteMember(id).subscribe(() => {
+          this.alert.success('Zapisano pomyślnie');
+          this.fetchData();
+        });
+      }
+    });
+  }
+
+  prepareResponsibilities(responsibilities: string[]): string[] {
+    return responsibilities.map(r => r.split(':')[1]);
+  }
+
+  private fetchData() {
+    this.memberService.getAllMembers().subscribe(result => {
+      this.members.next(result);
+    });
+  }
+
+  private openSaveDialog(id?: number) {
+    const dialogRef = this.dialog.open(MemberSaveDialogComponent, {minWidth: '720px', data: {memberId: id}});
+    dialogRef.afterClosed().subscribe(memberId => {
+      console.log('MemberSaveDialog closed', memberId);
+      this.fetchData();
     });
   }
 }

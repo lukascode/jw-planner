@@ -2,28 +2,28 @@
     display: flex;
     flex-flow: column;
     height: 100%;
-  
+
     .header {
       z-index: 1000;
-  
+
       .toolbar {
         position: sticky;
         position: -webkit-sticky;
         top: 0;
-  
+
         a {
           text-decoration: none;
           color: inherit;
-  
+
           .logo-header {
             margin-left: 5px;
           }
         }
-  
+
         .toolbar-spacer {
           flex: 1 1 auto;
         }
-  
+
         .toggle-nav-button {
           position: absolute;
           top: 50%;
@@ -32,7 +32,7 @@
         }
       }
     }
-  
+
     .content-container {
       flex-grow: 1;
       display: flex;
@@ -41,18 +41,19 @@
       position: relative;
       background-color: var(--color-content-bg);
       z-index: 700;
-  
+
       .main-content {
         flex-grow: 1;
         padding: 1em;
-  
+
         &.desktop-main-content {
           margin-left: 300px;
         }
       }
-  
+
       .footer {
         z-index: 900;
+        width: calc(100% + 300px);
       }
     }
   }
@@ -60,7 +61,7 @@
   :host ::ng-deep {
     .mat-list-base {
       padding: 0;
-  
+
       .mat-list-item {
         border-bottom: 1px dotted var(--color-accent);
 
@@ -69,17 +70,17 @@
         }
       }
     }
-  
+
     .desktop-navigation {
       position: fixed;
       top: 64px;
       left: 0;
       width: 300px;
-  
+
       height: 100%;
       overflow-y: auto;
       z-index: 800;
-  
+
       .mat-list-base {
         .mat-list-item {
           .mat-list-item-content {
@@ -88,14 +89,14 @@
         }
       }
     }
-  
+
     .mobile-navigation {
       -webkit-box-shadow: -1px 3px 11px -5px rgba(0, 0, 0, 0.75);
       -moz-box-shadow: -1px 3px 11px -5px rgba(0, 0, 0, 0.75);
       box-shadow: -1px 3px 11px -5px rgba(0, 0, 0, 0.75);
       z-index: 800;
       overflow: hidden;
-  
+
       .mat-list-base {
         .mat-list-item {
           .mat-list-item-content {
@@ -103,25 +104,25 @@
           }
         }
       }
-  
+
       &.hidden {
         height: 0;
         opacity: 0;
       }
     }
-  
+
     .desktop-navigation, .mobile-navigation {
       background-color: var(--color-nav-bg);
     }
   }
-  
+
   :host ::ng-deep {
     .header {
       .mat-toolbar-row, .mat-toolbar-single-row {
         height: 64px;
       }
     }
-  
+
     .footer {
       .mat-toolbar-row, .mat-toolbar-single-row {
         height: 74px;
