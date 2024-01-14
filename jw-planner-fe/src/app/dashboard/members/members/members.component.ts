@@ -34,7 +34,7 @@ export class MembersComponent implements OnInit {
   }
 
   delete(id: number) {
-    WarnDialogComponent.open(this.dialog, 'Czy jesteś pewny, że chcesz zrealizować tę operację?').subscribe(result => {
+    WarnDialogComponent.open(this.dialog, 'Czy jesteś pewny, że chcesz usunąć tego uczestnika?').subscribe(result => {
       if (result) {
         this.memberService.deleteMember(id).subscribe(() => {
           this.alert.success('Zapisano pomyślnie');

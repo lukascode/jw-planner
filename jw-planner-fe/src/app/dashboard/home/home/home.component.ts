@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  lectures: Observable<any[]>;
 
-  ngOnInit(): void {
+  constructor(private http: HttpClient) {
   }
 
+  ngOnInit() {
+    this.lectures = this.http.get<any[]>(`${environment.apiUrl}/lectures`);
+  }
 }

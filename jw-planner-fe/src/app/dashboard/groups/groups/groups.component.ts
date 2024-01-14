@@ -34,7 +34,7 @@ export class GroupsComponent implements OnInit {
   }
 
   delete(id: number) {
-    WarnDialogComponent.open(this.dialog, 'Czy jesteś pewny, że chcesz zrealizować tę operację?').subscribe(result => {
+    WarnDialogComponent.open(this.dialog, 'Czy jesteś pewny, że chcesz usunąć tę grupę?').subscribe(result => {
       if (result) {
         this.groupService.deleteGroup(id).subscribe(() => {
           this.alert.success('Zapisano pomyślnie');

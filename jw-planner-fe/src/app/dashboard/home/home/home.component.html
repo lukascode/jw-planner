@@ -1,1 +1,6 @@
-<p>home works!</p>
+<h3>Wykłady</h3>
+<mat-list role="list">
+  <mat-list-item role="listitem" *ngFor="let l of lectures | async">
+    {{l.lectureNumber + ' ' + l.lectureTitle}}
+  </mat-list-item>
+</mat-list>

@@ -1,4 +1,4 @@
-CREATE DATABASE IF NOT EXISTS jwplannerdb;
+CREATE DATABASE IF NOT EXISTS jwplannerdb CHARACTER SET utf8mb4 COLLATE utf8mb4_bin
 
 create table users(
     username varchar(50) not null primary key,
