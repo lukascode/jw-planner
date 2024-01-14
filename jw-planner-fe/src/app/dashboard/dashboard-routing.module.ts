@@ -9,7 +9,8 @@ const routes: Routes = [
     {path: '', redirectTo: 'home', pathMatch: 'full'},
     {path: 'home', loadChildren: () => import('./home/home.module').then(mod => mod.HomeModule)},
     {path: 'members', loadChildren: () => import('./members/members.module').then(mod => mod.MembersModule)},
-    {path: 'groups', loadChildren: () => import('./groups/groups.module').then(mod => mod.GroupsModule)}
+    {path: 'groups', loadChildren: () => import('./groups/groups.module').then(mod => mod.GroupsModule)},
+    {path: 'lecturers', loadChildren: () => import('./lecturers/lecturers.module').then(mod => mod.LecturersModule)}
   ]}
 ];
 

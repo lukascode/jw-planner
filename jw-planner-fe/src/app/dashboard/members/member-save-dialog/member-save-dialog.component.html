@@ -1,4 +1,5 @@
-<h2 mat-dialog-title>{{ (memberId ? 'edit_member' : 'add_member') | translate }}</h2>
+<h2 mat-dialog-title *ngIf="!lecturer">{{ (memberId ? 'edit_member' : 'add_member') | translate }}</h2>
+<h2 mat-dialog-title *ngIf="lecturer">{{ (memberId ? 'edit_lecturer' : 'add_lecturer') | translate }}</h2>
 <mat-dialog-content>
 <form [formGroup]="memberSaveForm" (keyup.enter)="save()" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="2em">
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap=".75em">

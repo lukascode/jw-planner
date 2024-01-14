@@ -10,8 +10,7 @@ public enum Responsibility {
     PUNKTY("Punkty"),
     MIKSER("Mikser"),
     MIKROFON("Mikrofon"),
-    PARKING("Parking"),
-    WSTRZYMANY("Wstrzymany");
+    PARKING("Parking");
 
     private final String name;
 

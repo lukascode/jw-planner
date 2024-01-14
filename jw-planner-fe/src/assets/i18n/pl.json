@@ -30,5 +30,7 @@
     "add_group": "Dodaj grupę",
     "edit_group": "Edytuj grupę",
     "group_name": "Nazwa grupy",
-    "group_supervisor": "Nadzorca grupy"
+    "group_supervisor": "Nadzorca grupy",
+    "add_lecturer": "Dodaj mówcę",
+    "edit_lecturer": "Edytuj mówcę"
 }

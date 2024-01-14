@@ -50,7 +50,7 @@ export class MembersComponent implements OnInit {
 
   private fetchData() {
     this.memberService.getAllMembers().subscribe(result => {
-      this.members.next(result);
+      this.members.next(result.filter(m => !m.external));
     });
   }
 
