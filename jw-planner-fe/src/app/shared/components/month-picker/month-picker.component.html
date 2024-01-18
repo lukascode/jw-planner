@@ -1,0 +1,23 @@
+<div class="month-picker-container" fxLayout="column" fxLayoutAlign="start stretch">
+  <div fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="1em">
+    <button mat-icon-button color="primary" aria-label="Previous month" (click)="previousMonth()">
+      <mat-icon>navigate_before</mat-icon>
+    </button>
+    <mat-form-field appearance="fill">
+      <mat-label>{{'month_and_year' | translate}}</mat-label>
+      <input matInput [matDatepicker]="datePicker" [formControl]="date" [min]="minDate" readonly/>
+      <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+      <mat-datepicker #datePicker
+                      startView="multi-year"
+                      (yearSelected)="chosenYearHandler($event)"
+                      (monthSelected)="chosenMonthHandler($event, datePicker)"
+                      (closed)="datePickerClosed()"
+                      panelClass="month-picker">
+      </mat-datepicker>
+    </mat-form-field>
+    <button mat-icon-button color="primary" aria-label="Next month" (click)="nextMonth()">
+      <mat-icon>navigate_next</mat-icon>
+    </button>
+  </div>
+</div>
+
