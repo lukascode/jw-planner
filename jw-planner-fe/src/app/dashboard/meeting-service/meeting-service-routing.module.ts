@@ -4,7 +4,8 @@ import {CommonModule} from '@angular/common';
 import {MeetingServiceComponent} from './meeting-service/meeting-service.component';
 
 const routes: Routes = [
-  {path: '', component: MeetingServiceComponent}
+  {path: '', component: MeetingServiceComponent},
+  {path: ':year/:month', component: MeetingServiceComponent},
 ];
 
 @NgModule({

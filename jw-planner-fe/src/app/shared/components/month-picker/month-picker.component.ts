@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import {Component, OnInit, Output, EventEmitter, Input} from '@angular/core';
 import {MAT_DATE_FORMATS} from '@angular/material/core';
 import {MatDatepicker} from '@angular/material/datepicker';
 import {FormControl} from '@angular/forms';
@@ -30,6 +30,7 @@ const moment = _rollupMoment || _moment;
 })
 export class MonthPickerComponent implements OnInit {
 
+  @Input() monthInput: string;
   @Output() monthEvent = new EventEmitter<string>();
 
   date = new FormControl(moment());
@@ -37,7 +38,13 @@ export class MonthPickerComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.emitEvent();
+    if (this.monthInput) {
+      const month = moment(this.monthInput, 'YYYY/MM');
+      if (month >= this.minDate) {
+        this.date.setValue(month);
+      }
+    }
+    //this.emitEvent();
   }
 
   nextMonth(): void {
