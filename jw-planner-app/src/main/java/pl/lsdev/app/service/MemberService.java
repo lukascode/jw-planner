@@ -70,7 +70,7 @@ public class MemberService {
     public List<MemberSnapshot> getAllMembers(List<Responsibility> responsibilities) {
         var result = memberRepository.retrieveAll().stream()
                 .filter(m -> m.getResponsibilities().containsAll(responsibilities))
-                .map(Member::toSnapshot).collect(Collectors.toList());
+                .map(Member::toSnapshot).toList();
         log.info("Got all members {size: {}}", result.size());
         return result;
     }

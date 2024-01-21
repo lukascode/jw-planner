@@ -70,7 +70,7 @@ public class Member {
                 .responsibilities(
                         responsibilities.stream()
                                 .map(Responsibility::toString)
-                                .collect(Collectors.toList())
+                                .toList()
                 )
                 .build();
     }

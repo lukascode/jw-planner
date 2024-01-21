@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.lsdev.app.persistance.Responsibility;
 import pl.lsdev.app.service.MemberService;
@@ -13,6 +14,7 @@ import pl.lsdev.app.web.dto.MemberSnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
+@Validated
 @RestController
 @RequestMapping("/api/v1/members")
 @RequiredArgsConstructor

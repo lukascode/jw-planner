@@ -36,7 +36,7 @@ public class GroupService {
 
     public List<GroupSnapshot> getAllGroups() {
         var result = groupRepository.retrieveAll().stream()
-                .map(Group::toSnapshot).collect(Collectors.toList());
+                .map(Group::toSnapshot).toList();
         log.info("Got all groups {size: {}}", result.size());
         return result;
     }

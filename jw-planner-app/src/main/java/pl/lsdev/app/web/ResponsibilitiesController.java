@@ -1,5 +1,6 @@
 package pl.lsdev.app.web;
 
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,6 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@Validated
 @RestController
 @RequestMapping("/api/v1/responsibilities")
 public class ResponsibilitiesController {
@@ -16,6 +18,6 @@ public class ResponsibilitiesController {
     @GetMapping
     public List<String> getResponsibilities() {
         return Stream.of(Responsibility.values())
-                .map(Responsibility::toString).collect(Collectors.toList());
+                .map(Responsibility::toString).toList();
     }
 }

@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.lsdev.app.service.GroupService;
 import pl.lsdev.app.web.dto.GroupSaveRequest;
@@ -11,6 +12,7 @@ import pl.lsdev.app.web.dto.GroupSnapshot;
 
 import java.util.List;
 
+@Validated
 @RestController
 @RequestMapping("/api/v1/groups")
 @RequiredArgsConstructor
