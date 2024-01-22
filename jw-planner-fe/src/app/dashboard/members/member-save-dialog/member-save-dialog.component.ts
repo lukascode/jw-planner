@@ -3,8 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MemberService } from '../members.service';
 import { Observable } from 'rxjs';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {Gender, MemberSnapshot} from '../members.model';
-import { finalize } from 'rxjs/operators';
+import {Gender} from '../members.model';
 import { AlertService } from 'ngx-alerts';
 
 @Component({
@@ -35,7 +34,7 @@ export class MemberSaveDialogComponent implements OnInit {
     }
   }
 
-  private createForm(formBuilder: FormBuilder) {
+  private createForm(formBuilder: FormBuilder): void {
     const initialResponsibilities = [];
     let initialGender = '';
     if (this.lecturer) {
@@ -55,7 +54,7 @@ export class MemberSaveDialogComponent implements OnInit {
     });
   }
 
-  private fillForm() {
+  private fillForm(): void {
     this.memberService.getMember(this.memberId as number).subscribe(member => {
       this.memberSaveForm.patchValue({
         firstName: member.firstName,
@@ -71,11 +70,11 @@ export class MemberSaveDialogComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.responsibilities = this.memberService.getResponsibilities();
   }
 
-  save() {
+  save(): void {
     this.memberService.saveMember(this.memberSaveForm.value, this.memberId)
     .subscribe(id => {
       this.dialogRef.close(id);

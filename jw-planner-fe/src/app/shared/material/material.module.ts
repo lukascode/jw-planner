@@ -16,6 +16,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatTableModule} from '@angular/material/table';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatMomentDateModule} from '@angular/material-moment-adapter';
+import {MatDividerModule} from '@angular/material/divider';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import {MatMomentDateModule} from '@angular/material-moment-adapter';
     MatSlideToggleModule,
     MatTableModule,
     MatDatepickerModule,
-    MatMomentDateModule
+    MatMomentDateModule,
+    MatDividerModule
   ]
 })
 export class MaterialModule { }

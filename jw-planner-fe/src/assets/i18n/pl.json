@@ -22,6 +22,7 @@
     "female": "Kobieta",
     "cancel": "Anuluj",
     "save": "Zapisz",
+    "edit": "Edytuj",
     "external": "Przyjezdny",
     "responsibilities": "Role",
     "warning": "Ostrzeżenie",
@@ -33,5 +34,15 @@
     "group_supervisor": "Nadzorca grupy",
     "add_lecturer": "Dodaj mówcę",
     "edit_lecturer": "Edytuj mówcę",
-    "month_and_year": "Miesiąc i Rok"
+    "month_and_year": "Miesiąc i Rok",
+    "week": "Tydzień",
+    "avMixer": "Mikser",
+    "avMicrophone": "Mikrofon",
+    "avStageMicrophone": "Mikrofon (Scena)",
+    "keeper": "Porządkowy",
+    "zoomKeeper": "Porządkowy (Zoom)",
+    "hallKeeper": "Porządkowy (Sala)",
+    "parking": "Parking",
+    "cleaning": "Sprzątanie",
+    "print": "Drukuj"
 }

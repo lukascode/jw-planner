@@ -13,6 +13,15 @@ body {
     color: #d9534f;
 }
 
-  .success-color {
-    color: #5cb85c;
+.success-color {
+  color: #5cb85c;
+}
+
+@media print {
+  body {
+    font-size: 1rem !important;
   }
+  .no-print {
+    display: none !important;
+  }
+}

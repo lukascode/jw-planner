@@ -1,6 +1,6 @@
 <div class="month-picker-container" fxLayout="column" fxLayoutAlign="start stretch">
   <div fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="1em">
-    <button mat-icon-button color="primary" aria-label="Previous month" (click)="previousMonth()">
+    <button mat-icon-button color="primary" aria-label="Previous month" (click)="previousMonth()" [disabled]="arrowsDisabled" class="no-print">
       <mat-icon>navigate_before</mat-icon>
     </button>
     <mat-form-field appearance="fill">
@@ -15,7 +15,7 @@
                       panelClass="month-picker">
       </mat-datepicker>
     </mat-form-field>
-    <button mat-icon-button color="primary" aria-label="Next month" (click)="nextMonth()">
+    <button mat-icon-button color="primary" aria-label="Next month" (click)="nextMonth()" [disabled]="arrowsDisabled" class="no-print">
       <mat-icon>navigate_next</mat-icon>
     </button>
   </div>

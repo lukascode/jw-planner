@@ -31,6 +31,7 @@ const moment = _rollupMoment || _moment;
 export class MonthPickerComponent implements OnInit {
 
   @Input() monthInput: string;
+  @Input() arrowsDisabled: boolean;
   @Output() monthEvent = new EventEmitter<string>();
 
   date = new FormControl(moment());
@@ -44,7 +45,6 @@ export class MonthPickerComponent implements OnInit {
         this.date.setValue(month);
       }
     }
-    //this.emitEvent();
   }
 
   nextMonth(): void {

@@ -1,1 +1,141 @@
-<app-month-picker (monthEvent)="monthChosen($event)" [monthInput]="currentMonth"></app-month-picker>
+<div id="staff-container" class="printing">
+<h1 style="text-align: center; font-size: 1.6rem">Nagłośnienie i porządkowi</h1>
+
+<div style="margin:2em"></div>
+
+<app-month-picker (monthEvent)="monthChosen($event)" [monthInput]="currentMonth" [arrowsDisabled]="processing"></app-month-picker>
+
+<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="0.5em" class="no-print">
+  <button mat-raised-button (click)="edit()" color="accent" *ngIf="!editMode">{{ 'edit' | translate}}</button>
+  <button mat-raised-button (click)="save()" color="primary" *ngIf="editMode">{{ 'save' | translate}}</button>
+  <button mat-raised-button (click)="cancel()" color="accent" *ngIf="cancelVisible">{{ 'cancel' | translate}}</button>
+  <button mat-raised-button (click)="print()" color="primary" *ngIf="!editMode">{{ 'print' | translate }}</button>
+</div>
+
+<div style="margin:1em"></div>
+
+<mat-table [dataSource]="weeks" class="mat-elevation-z1">
+
+  <ng-container matColumnDef="week">
+    <mat-header-cell *matHeaderCellDef>{{'week' | translate}}</mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <b>{{element.week}}</b>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="avMixer">
+    <mat-header-cell *matHeaderCellDef>{{'avMixer' | translate}}</mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <ng-container *ngIf="!editMode">{{element.avMixer}}</ng-container>
+      <mat-form-field *ngIf="editMode">
+        <mat-select required [value]="element.avMixer" (selectionChange)="memberChanged($event, element, 'avMixer')">
+          <mat-option *ngFor="let member of getMembers('MIKSER')" [value]="member.firstName + ' ' + member.lastName">
+            {{member.firstName + ' ' + member.lastName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="avMicrophone">
+    <mat-header-cell *matHeaderCellDef>{{'avMicrophone' | translate}}</mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <ng-container *ngIf="!editMode">{{element.avMicrophone}}</ng-container>
+      <mat-form-field *ngIf="editMode">
+        <mat-select required [value]="element.avMicrophone" (selectionChange)="memberChanged($event, element, 'avMicrophone')">
+          <mat-option *ngFor="let member of getMembers('MIKROFON')" [value]="member.firstName + ' ' + member.lastName">
+            {{member.firstName + ' ' + member.lastName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="avStageMicrophone">
+    <mat-header-cell *matHeaderCellDef>{{'avStageMicrophone' | translate}}</mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <ng-container *ngIf="!editMode">{{element.avStageMicrophone}}</ng-container>
+      <mat-form-field *ngIf="editMode">
+        <mat-select required [value]="element.avStageMicrophone" (selectionChange)="memberChanged($event, element, 'avStageMicrophone')">
+          <mat-option *ngFor="let member of getMembers('MIKROFON')" [value]="member.firstName + ' ' + member.lastName">
+            {{member.firstName + ' ' + member.lastName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="keeper">
+    <mat-header-cell *matHeaderCellDef>{{'keeper' | translate}}</mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <ng-container *ngIf="!editMode">{{element.keeper}}</ng-container>
+      <mat-form-field *ngIf="editMode">
+        <mat-select required [value]="element.keeper" (selectionChange)="memberChanged($event, element, 'keeper')">
+          <mat-option *ngFor="let member of getMembers('PORZADKOWY')" [value]="member.firstName + ' ' + member.lastName">
+            {{member.firstName + ' ' + member.lastName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="zoomKeeper">
+    <mat-header-cell *matHeaderCellDef>{{'zoomKeeper' | translate}}</mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <ng-container *ngIf="!editMode">{{element.zoomKeeper}}</ng-container>
+      <mat-form-field *ngIf="editMode">
+        <mat-select required [value]="element.zoomKeeper" (selectionChange)="memberChanged($event, element, 'zoomKeeper')">
+          <mat-option *ngFor="let member of getMembers('PORZADKOWY_ZOOM')" [value]="member.firstName + ' ' + member.lastName">
+            {{member.firstName + ' ' + member.lastName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="hallKeeper">
+    <mat-header-cell *matHeaderCellDef>{{'hallKeeper' | translate}}</mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <ng-container *ngIf="!editMode">{{element.hallKeeper}}</ng-container>
+      <mat-form-field *ngIf="editMode">
+        <mat-select required [value]="element.hallKeeper" (selectionChange)="memberChanged($event, element, 'hallKeeper')">
+          <mat-option *ngFor="let member of getMembers('PORZADKOWY_SALA')" [value]="member.firstName + ' ' + member.lastName">
+            {{member.firstName + ' ' + member.lastName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="parking">
+    <mat-header-cell *matHeaderCellDef>{{'parking' | translate}}</mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <ng-container *ngIf="!editMode">{{element.parking}}</ng-container>
+      <mat-form-field *ngIf="editMode">
+        <mat-select required [value]="element.parking" (selectionChange)="memberChanged($event, element, 'parking')">
+          <mat-option *ngFor="let member of getMembers('PARKING')" [value]="member.firstName + ' ' + member.lastName">
+            {{member.firstName + ' ' + member.lastName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="cleaning">
+    <mat-header-cell *matHeaderCellDef>{{'cleaning' | translate}}</mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <ng-container *ngIf="!editMode">{{element.cleaning}}</ng-container>
+      <mat-form-field *ngIf="editMode">
+        <mat-select required [value]="element.cleaning" (selectionChange)="memberChanged($event, element, 'cleaning')">
+          <mat-option *ngFor="let group of groups" [value]="group.name + ' ' + group.supervisorFirstName + ' ' + group.supervisorLastName">
+            {{group.name + ' ' + group.supervisorFirstName + ' ' + group.supervisorLastName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+</div>
