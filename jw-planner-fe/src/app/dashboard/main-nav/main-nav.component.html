@@ -18,7 +18,7 @@
           {{ email }}
         </button>
         <mat-menu #userProfileMenu="matMenu">
-          <button mat-menu-item>Ustawienia</button>
+          <!--<button mat-menu-item>Ustawienia</button>-->
           <button mat-menu-item (click)="logout()">Wyloguj</button>
         </mat-menu>
       </mat-toolbar>
@@ -26,11 +26,11 @@
 
     <ng-template #navigation>
       <mat-nav-list>
-        <a mat-list-item routerLink="home">Strona główna</a>
+        <a mat-list-item routerLink="home">Wykłady</a>
         <a mat-list-item routerLink="members">Uczestnicy</a>
         <a mat-list-item routerLink="groups">Grupy</a>
         <a mat-list-item routerLink="lecturers">Mówcy</a>
-        <a mat-list-item routerLink="#">Plan zebrania</a>
+        <a mat-list-item routerLink="meeting-program">Program zebrania</a>
         <a mat-list-item routerLink="meeting-staff">Obsługa zebrania</a>
       </mat-nav-list>
     </ng-template>
@@ -46,16 +46,14 @@
       </div>
       <div class="main-content" [ngClass.md]="'desktop-main-content'" [ngClass.gt-md]="'desktop-main-content'">
         <!-- page content -->
-
         <router-outlet></router-outlet>
-
         <!-- page content -->
       </div>
-      <div class="footer no-print">
-        <mat-toolbar color="primary">
-          <img src="assets/angular.svg" alt="Angular icon" width="44" height="44">&nbsp;Powered by Angular
-        </mat-toolbar>
-      </div>
+<!--      <div class="footer no-print">-->
+<!--        <mat-toolbar color="primary">-->
+<!--          <img src="assets/angular.svg" alt="Angular icon" width="44" height="44">&nbsp;Powered by Angular-->
+<!--        </mat-toolbar>-->
+<!--      </div>-->
     </div>
 
   </div>

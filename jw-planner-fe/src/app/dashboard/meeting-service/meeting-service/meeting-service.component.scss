@@ -8,7 +8,7 @@ mat-table {
 
   .mat-column-cleaning {
     min-width: 140px;
-    color: var(--color-warn);
+    color: forestgreen;
     font-weight: bolder;
   }
 
@@ -22,7 +22,7 @@ mat-table {
     font-size: 0.75rem;
   }
 
-  .mat-row:nth-child(even){
+  .mat-row:nth-child(odd){
     background-color: var(--color-accent);
   }
 

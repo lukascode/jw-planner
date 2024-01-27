@@ -7,12 +7,11 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.lsdev.app.persistance.Group;
 import pl.lsdev.app.persistance.GroupRepository;
 import pl.lsdev.app.persistance.Member;
-import pl.lsdev.app.web.dto.GroupSaveRequest;
-import pl.lsdev.app.web.dto.GroupSnapshot;
+import pl.lsdev.app.web.dto.group.GroupSaveRequest;
+import pl.lsdev.app.web.dto.group.GroupSnapshot;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service

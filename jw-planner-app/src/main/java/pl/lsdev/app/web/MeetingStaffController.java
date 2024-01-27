@@ -6,9 +6,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.lsdev.app.service.MeetingStaffService;
-import pl.lsdev.app.web.dto.MeetingStaffMonthSnapshot;
-import pl.lsdev.app.web.dto.MeetingStaffSaveRequest;
-import pl.lsdev.app.web.dto.WeekDto;
+import pl.lsdev.app.web.dto.staff.MeetingStaffMonthSnapshot;
+import pl.lsdev.app.web.dto.staff.MeetingStaffSaveRequest;
+import pl.lsdev.app.web.dto.program.WeekDto;
 
 import java.time.YearMonth;
 import java.util.List;

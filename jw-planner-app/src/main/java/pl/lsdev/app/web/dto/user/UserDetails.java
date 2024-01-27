@@ -1,4 +1,4 @@
-package pl.lsdev.app.web.dto;
+package pl.lsdev.app.web.dto.user;
 
 import lombok.Value;
 

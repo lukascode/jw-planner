@@ -7,12 +7,14 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { WarnDialogComponent } from './components/warn-dialog/warn-dialog.component';
 import { MonthPickerComponent } from './components/month-picker/month-picker.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { MeetingProgramComponent } from './components/meeting-program/meeting-program.component';
 
 @NgModule({
   declarations: [
     PageNotFoundComponent,
     WarnDialogComponent,
-    MonthPickerComponent
+    MonthPickerComponent,
+    MeetingProgramComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +28,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     FlexLayoutModule,
     TranslateModule,
     MaterialModule,
-    MonthPickerComponent
+    MonthPickerComponent,
+    MeetingProgramComponent
   ]
 })
 export class SharedModule { }

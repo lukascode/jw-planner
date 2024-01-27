@@ -1,0 +1,96 @@
+.week-table {
+  border-collapse: collapse;
+  font-size: 14px;
+  padding: 5px;
+  page-break-inside: avoid;
+  width: 100%;
+  border: 2px solid #C8C8C8;
+  margin-top: 1em;
+
+  mat-form-field {
+    font-size: 0.9em;
+    width: 140px;
+    text-align: center;
+  }
+
+  th,td {
+    padding: 6px;
+    border: 1px solid #fff;
+  }
+
+  .header-1 {
+    td {
+      text-align: center;
+    }
+  }
+
+  .header-2 {
+    td {
+      text-align: center;
+      font-size: 0.85em;
+    }
+
+    td:nth-child(1) {
+      background-color: #4A5255;
+      color: #FFF;
+      width: 30%;
+    }
+
+    td:nth-child(2) {
+      background-color: #C18626;
+      color: #FFF;
+      width: 40%;
+    }
+
+    td:nth-child(3) {
+      background-color: #961526;
+      color: #FFF;
+      width: 30%;
+      min-width: 170px;
+    }
+  }
+
+  .header-3 {
+    td {
+      background-color: var(--color-program-sunday);
+      color: #FFF;
+      font-size: 10px;
+      height: 15px;
+      text-align: center;
+    }
+  }
+
+  .header-4 {
+    td {
+      background-color: var(--color-program-content-sunday);
+    }
+  }
+
+  .ministry:nth-child(even) {
+    background-color: var(--color-program-even);
+  }
+
+  .task-help {
+    font-size: 0.8em;
+  }
+}
+
+.program-container {
+
+  .no-data {
+    text-align: center;
+    margin: 1em;
+  }
+
+  mat-spinner {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+@media print {
+  .week-table {
+    font-size: 10px;
+    margin-bottom: 10px
+  }
+}

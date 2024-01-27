@@ -2,8 +2,8 @@ package pl.lsdev.app.persistance;
 
 import jakarta.persistence.*;
 import lombok.*;
-import pl.lsdev.app.web.dto.MeetingStaffMonthSnapshot;
-import pl.lsdev.app.web.dto.MeetingStaffWeekDto;
+import pl.lsdev.app.web.dto.staff.MeetingStaffMonthSnapshot;
+import pl.lsdev.app.web.dto.staff.MeetingStaffWeekDto;
 
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;

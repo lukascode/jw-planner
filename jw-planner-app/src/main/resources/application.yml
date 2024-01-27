@@ -36,3 +36,6 @@ logging:
         web: DEBUG
         security:
           web: TRACE
+
+jw:
+  url: https://wol.jw.org/pl/wol/meetings/r12/lp-p

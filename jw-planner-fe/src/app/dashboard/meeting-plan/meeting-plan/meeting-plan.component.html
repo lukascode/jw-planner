@@ -1,0 +1,9 @@
+<div id="program-container">
+  <h2 style="text-align: center;">PROGRAM ZEBRANIA</h2>
+<!--  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="0.5em" class="no-print">-->
+<!--    <button mat-raised-button (click)="changeMonth()" color="accent">Test</button>-->
+<!--  </div>-->
+  <app-month-picker (monthEvent)="monthChosen($event)" [monthInput]="currentMonth" [arrowsDisabled]="false"></app-month-picker>
+  <app-meeting-program *ngIf="currentMonth" [month]="currentMonth"></app-meeting-program>
+</div>
+

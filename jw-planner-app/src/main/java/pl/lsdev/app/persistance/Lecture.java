@@ -2,7 +2,7 @@ package pl.lsdev.app.persistance;
 
 import jakarta.persistence.*;
 import lombok.*;
-import pl.lsdev.app.web.dto.LectureSnapshot;
+import pl.lsdev.app.web.dto.lecture.LectureSnapshot;
 
 @Entity
 @Table(name = "jw_lectures")

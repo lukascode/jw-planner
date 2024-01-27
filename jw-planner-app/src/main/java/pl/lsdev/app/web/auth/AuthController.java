@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import pl.lsdev.app.web.dto.UserDetails;
+import pl.lsdev.app.web.dto.user.UserDetails;
 
 import java.security.Principal;
 

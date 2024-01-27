@@ -47,6 +47,9 @@ $custom-typography: mat-typography-config(
   --color-nav-bg: #ffffff;
   --color-content-bg: #ffffff;
   --color-text: #000000;
+  --color-program-even: #E9E9E9;
+  --color-program-sunday: #B8AC96;
+  --color-program-content-sunday: #E8E4DD;
 }
 
 :root .dark-mode {
@@ -56,4 +59,7 @@ $custom-typography: mat-typography-config(
   --color-nav-bg: #424242;
   --color-content-bg: #616161;
   --color-text: #ffffff;
+  --color-program-even: var(--color-accent);
+  --color-program-sunday: var(--color-primary);
+  --color-program-content-sunday: var(--color-content-bg);
 }

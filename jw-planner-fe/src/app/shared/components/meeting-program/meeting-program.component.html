@@ -1,0 +1,202 @@
+<div class="program-container">
+  <mat-spinner *ngIf="processing" diameter="45"></mat-spinner>
+  <div class="no-data" *ngIf="!programId && !processing">
+    <p>Brak danych na ten miesiąc</p>
+  </div>
+  <div *ngIf="programId">
+
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="0.5em" class="no-print">
+      <button mat-raised-button (click)="edit()" color="accent" *ngIf="!editMode">{{ 'edit' | translate}}</button>
+      <button mat-raised-button (click)="save()" color="primary" *ngIf="editMode">{{ 'save' | translate}}</button>
+      <button mat-raised-button (click)="cancel()" color="accent" *ngIf="editMode">{{ 'cancel' | translate}}</button>
+      <button mat-raised-button (click)="print()" color="primary" *ngIf="!editMode">{{ 'print' | translate }}</button>
+    </div>
+
+    <table class="week-table" *ngFor="let w of weeks">
+      <tr class="header-1">
+        <td colspan="3">
+          <b>{{w.week}}</b>,
+          Przewodniczący:
+          <span *ngIf="!editMode">
+        <b>{{w.chairman}}</b>
+      </span>
+          <span *ngIf="editMode">
+        <mat-form-field>
+          <mat-select [value]="w.chairman" (selectionChange)="valueChanged($event, w, 'chairman')">
+            <mat-option *ngFor="let member of getMembers('STARSZY')" [value]="member.firstName + ' ' + member.lastName">
+              {{member.firstName + ' ' + member.lastName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </span>,
+          Modlitwy:
+          <span *ngIf="!editMode">
+        <b>{{w.prayer1}}</b>
+      </span>
+          <span *ngIf="editMode">
+        <mat-form-field>
+          <mat-select [value]="w.prayer1" (selectionChange)="valueChanged($event, w, 'prayer1')">
+            <mat-option *ngFor="let member of getMembers('STARSZY', 'SLUGA')"
+                        [value]="member.firstName + ' ' + member.lastName">
+              {{member.firstName + ' ' + member.lastName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </span>,
+          <span *ngIf="!editMode">
+        <b>{{w.prayer2}}</b>
+      </span>
+          <span *ngIf="editMode">
+        <mat-form-field>
+          <mat-select [value]="w.prayer2" (selectionChange)="valueChanged($event, w, 'prayer2')">
+            <mat-option *ngFor="let member of getMembers('STARSZY', 'SLUGA')"
+                        [value]="member.firstName + ' ' + member.lastName">
+              {{member.firstName + ' ' + member.lastName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </span>
+        </td>
+      </tr>
+      <tr class="header-2">
+        <td><b>SKARBY ZE SŁOWA BOŻEGO</b></td>
+        <td><b>ULEPSZAJMY SWĄ SŁUŻBĘ</b></td>
+        <td><b>CHRZEŚCIJAŃSKI TRYB ŻYCIA</b></td>
+      </tr>
+
+      <tr class="ministry" *ngFor="let item of [].constructor(w.rows); let i = index">
+        <td>
+          {{w.treasureTopics![i]?.topic}}<br>
+          <span *ngIf="!editMode">
+        <b>{{w.treasureTopics![i]?.assignedPerson}}</b>
+      </span>
+          <span *ngIf="editMode && w.treasureTopics![i]">
+        <mat-form-field>
+          <mat-select [value]="w.treasureTopics![i]?.assignedPerson"
+                      (selectionChange)="valueChanged($event, w.treasureTopics![i], 'assignedPerson')">
+            <mat-option *ngFor="let member of getMembers('STARSZY', 'SLUGA')"
+                        [value]="member.firstName + ' ' + member.lastName">
+              {{member.firstName + ' ' + member.lastName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </span>
+        </td>
+        <td>
+          {{w.improveTopics![i]?.topic}}<br>
+          <span *ngIf="!editMode">
+        <b>{{w.improveTopics![i]?.assignedPerson}}</b>
+      </span>
+          <span *ngIf="editMode && w.improveTopics![i]">
+        <mat-form-field>
+          <mat-select [value]="w.improveTopics![i]?.assignedPerson"
+                      (selectionChange)="valueChanged($event, w.improveTopics![i], 'assignedPerson')">
+            <mat-option *ngFor="let member of getMembers('PUNKTY')" [value]="member.firstName + ' ' + member.lastName">
+              {{member.firstName + ' ' + member.lastName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </span>
+          <span *ngIf="w.improveTopics![i]?.helper && !editMode"
+                class="task-help">&nbsp;&nbsp;p. {{w.improveTopics![i]?.helper}}</span>
+          <span *ngIf="editMode && w.improveTopics![i]">
+         &nbsp;&nbsp;p.
+        <mat-form-field>
+          <mat-select [value]="w.improveTopics![i]?.helper"
+                      (selectionChange)="valueChanged($event, w.improveTopics![i], 'helper')">
+            <mat-option *ngFor="let member of getMembers('PUNKTY')" [value]="member.firstName + ' ' + member.lastName">
+              {{member.firstName + ' ' + member.lastName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </span>
+        </td>
+        <td>
+          {{w.livingAsChristianTopics![i]?.topic}}<br>
+          <span *ngIf="!editMode">
+        <b>{{w.livingAsChristianTopics![i]?.assignedPerson}}</b>
+      </span>
+          <span *ngIf="editMode && w.livingAsChristianTopics![i]">
+        <mat-form-field>
+          <mat-select [value]="w.livingAsChristianTopics![i]?.assignedPerson"
+                      (selectionChange)="valueChanged($event, w.livingAsChristianTopics![i], 'assignedPerson')">
+            <mat-option *ngFor="let member of getMembers('STARSZY', 'SLUGA')"
+                        [value]="member.firstName + ' ' + member.lastName">
+              {{member.firstName + ' ' + member.lastName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </span>
+        </td>
+      </tr>
+
+      <tr class="header-3">
+        <td colspan="3"><b>NIEDZIELA</b></td>
+      </tr>
+
+      <tr class="header-4">
+        <td>
+          Przewodniczący
+          <span *ngIf="!editMode">
+        <br>
+        <b>{{w.sundayChairman}}</b>
+      </span>
+          <span *ngIf="editMode">
+        <mat-form-field>
+          <mat-select [value]="w.sundayChairman" (selectionChange)="valueChanged($event, w, 'sundayChairman')">
+            <mat-option *ngFor="let member of getMembers('STARSZY')" [value]="member.firstName + ' ' + member.lastName">
+              {{member.firstName + ' ' + member.lastName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </span>
+          <br>
+          Lektor:
+          <span *ngIf="!editMode">
+        <b>{{w.sundayLector}}</b>
+      </span>
+          <span *ngIf="editMode">
+        <mat-form-field>
+          <mat-select [value]="w.sundayLector" (selectionChange)="valueChanged($event, w, 'sundayLector')">
+            <mat-option *ngFor="let member of getMembers()" [value]="member.firstName + ' ' + member.lastName">
+              {{member.firstName + ' ' + member.lastName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </span>
+        </td>
+        <td>
+          Wykład:
+          <span *ngIf="!editMode">
+        <em>{{w.sundayLectureTitle}}</em>
+      </span>
+          <span *ngIf="editMode">
+        <mat-form-field>
+          <mat-select [value]="w.sundayLectureTitle" (selectionChange)="valueChanged($event, w, 'sundayLectureTitle')">
+            <mat-option *ngFor="let l of lectures" [value]="l.lectureTitle">
+              {{+l.lectureNumber + ' ' + l.lectureTitle}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </span>
+        </td>
+        <td>
+          Mówca:
+          <span *ngIf="!editMode">
+        <br>
+        <b>{{w.sundayLecturer}}</b>
+      </span>
+          <span *ngIf="editMode">
+        <mat-form-field>
+          <mat-select [value]="w.sundayLecturer" (selectionChange)="valueChanged($event, w, 'sundayLecturer')">
+            <mat-option *ngFor="let member of getMembers('MOWCA')" [value]="member.firstName + ' ' + member.lastName">
+              {{member.firstName + ' ' + member.lastName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </span>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

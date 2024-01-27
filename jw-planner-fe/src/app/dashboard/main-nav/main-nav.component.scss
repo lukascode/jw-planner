@@ -7,8 +7,7 @@
       z-index: 1000;
 
       .toolbar {
-        position: sticky;
-        position: -webkit-sticky;
+        position: fixed;
         top: 0;
 
         a {
@@ -34,6 +33,7 @@
     }
 
     .content-container {
+      margin-top: 64px;
       flex-grow: 1;
       display: flex;
       flex-flow: column;

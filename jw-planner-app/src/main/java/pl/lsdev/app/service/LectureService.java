@@ -5,10 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import pl.lsdev.app.persistance.Lecture;
 import pl.lsdev.app.persistance.LectureRepository;
-import pl.lsdev.app.web.dto.LectureSnapshot;
+import pl.lsdev.app.web.dto.lecture.LectureSnapshot;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service

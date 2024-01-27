@@ -8,8 +8,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.lsdev.app.persistance.Responsibility;
 import pl.lsdev.app.service.MemberService;
-import pl.lsdev.app.web.dto.MemberSaveRequest;
-import pl.lsdev.app.web.dto.MemberSnapshot;
+import pl.lsdev.app.web.dto.member.MemberSaveRequest;
+import pl.lsdev.app.web.dto.member.MemberSnapshot;
 
 import java.util.ArrayList;
 import java.util.List;

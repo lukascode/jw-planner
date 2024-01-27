@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import pl.lsdev.app.web.dto.GroupSnapshot;
+import pl.lsdev.app.web.dto.group.GroupSnapshot;
 
 import java.time.LocalDateTime;
 

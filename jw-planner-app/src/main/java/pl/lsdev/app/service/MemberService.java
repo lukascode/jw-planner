@@ -7,12 +7,11 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.lsdev.app.persistance.Member;
 import pl.lsdev.app.persistance.MemberRepository;
 import pl.lsdev.app.persistance.Responsibility;
-import pl.lsdev.app.web.dto.MemberSaveRequest;
-import pl.lsdev.app.web.dto.MemberSnapshot;
+import pl.lsdev.app.web.dto.member.MemberSaveRequest;
+import pl.lsdev.app.web.dto.member.MemberSnapshot;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service
