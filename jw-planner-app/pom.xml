@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>pl.lsdev</groupId>
 	<artifactId>jw-planner-app</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>jw-planner-app</name>
 	<description>Spring Boot Project</description>
 	<properties>
