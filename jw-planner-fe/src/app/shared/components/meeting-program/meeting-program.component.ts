@@ -12,6 +12,8 @@ import {
   MeetingProgramWeekDto
 } from '../../../dashboard/meeting-plan/program.model';
 import {MatSelectChange} from '@angular/material/select';
+import {MatDialog} from "@angular/material/dialog";
+import {ProgramDialogComponent} from "../program-dialog/program-dialog.component";
 
 const moment = _rollupMoment || _moment;
 
@@ -36,11 +38,11 @@ export class MeetingProgramComponent implements OnInit, OnChanges {
 
   constructor(private meetingProgram: MeetingProgramService,
               private memberService: MemberService,
+              private dialog: MatDialog,
               private alert: AlertService) {
   }
 
   ngOnInit(): void {
-    console.log('meetingProgram ngOnInit!!!');
     this.memberService.getAllMembers().subscribe(members => this.members = members);
     this.meetingProgram.getLectures().subscribe(lectures => this.lectures = lectures);
     this.fetchProgram();
@@ -127,5 +129,11 @@ export class MeetingProgramComponent implements OnInit, OnChanges {
       return this.members.filter(m => m.responsibilities.map(r => r.split(':')[0]).some(r => roles.includes(r)));
     }
     return this.members;
+  }
+
+  showProgram(week: MeetingProgramWeekDto): void {
+    const w = moment(week.dateFrom).year() + '/' + moment(week.dateFrom).week();
+    console.log(w);
+    this.dialog.open(ProgramDialogComponent, {minWidth: '480px', data: {week: w}});
   }
 }

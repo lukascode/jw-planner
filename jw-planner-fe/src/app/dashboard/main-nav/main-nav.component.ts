@@ -1,7 +1,8 @@
-import {AfterViewChecked, ChangeDetectorRef, Component, Renderer2, OnInit} from '@angular/core';
-import {animate, style, transition, trigger} from "@angular/animations";
+import {AfterViewChecked, ChangeDetectorRef, Component, Renderer2} from '@angular/core';
+import {animate, style, transition, trigger} from '@angular/animations';
 import { AuthService } from 'src/app/security/auth.service';
 import { Router } from '@angular/router';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-main-nav',
@@ -38,7 +39,7 @@ export class MainNavComponent implements AfterViewChecked {
     private router: Router) {
       const userDetails = JSON.parse(localStorage.getItem('userDetails') as string);
       this.email = userDetails.email;
-      this.appVersion = userDetails.appVersion;
+      this.appVersion = environment.appVersion;
       this.setThemeMode(userDetails.darkMode);
   }
 

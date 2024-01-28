@@ -13,6 +13,16 @@
     text-align: center;
   }
 
+  tr {
+    position: relative;
+  }
+
+  .show-program-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
   th,td {
     padding: 6px;
     border: 1px solid #fff;
