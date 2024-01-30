@@ -1,5 +1,7 @@
 iframe {
   width: 100%;
+  max-width: 600px;
   height: 100vh;
   border: none;
+  overflow: hidden;
 }

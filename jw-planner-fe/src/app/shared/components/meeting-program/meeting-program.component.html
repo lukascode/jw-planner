@@ -161,7 +161,7 @@
           <span *ngIf="editMode">
         <mat-form-field>
           <mat-select [value]="w.sundayLector" (selectionChange)="valueChanged($event, w, 'sundayLector')">
-            <mat-option *ngFor="let member of getMembers()" [value]="member.firstName + ' ' + member.lastName">
+            <mat-option *ngFor="let member of getMembers('LEKTOR')" [value]="member.firstName + ' ' + member.lastName">
               {{member.firstName + ' ' + member.lastName}}
             </mat-option>
           </mat-select>
