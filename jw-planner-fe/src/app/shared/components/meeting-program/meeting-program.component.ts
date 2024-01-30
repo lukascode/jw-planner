@@ -144,6 +144,6 @@ export class MeetingProgramComponent implements OnInit, OnChanges {
 
   showProgram(week: MeetingProgramWeekDto): void {
     const w = moment(week.dateFrom).year() + '/' + moment(week.dateFrom).week();
-    this.dialog.open(ProgramDialogComponent, {minWidth: '480px', data: {week: w}});
+    this.dialog.open(ProgramDialogComponent, {minWidth: '70vw', minHeight: '80vh', data: {week: w}});
   }
 }
