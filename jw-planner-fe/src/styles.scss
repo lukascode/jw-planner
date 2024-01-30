@@ -5,9 +5,19 @@ html,body {
 body {
     margin: 0;
     padding: 0;
-    //height: 100%;
     color: var(--color-text);
     background-color: var(--color-content-bg);
+}
+
+.program-dialog {
+  min-width: 640px;
+  min-height: 80vh;
+}
+
+@media (max-width: 640px) {
+  .program-dialog {
+    min-width: 80vw;
+  }
 }
 
 .error-color, .required {

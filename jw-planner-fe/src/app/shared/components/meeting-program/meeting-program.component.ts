@@ -12,8 +12,8 @@ import {
   MeetingProgramWeekDto
 } from '../../../dashboard/meeting-plan/program.model';
 import {MatSelectChange} from '@angular/material/select';
-import {MatDialog} from "@angular/material/dialog";
-import {ProgramDialogComponent} from "../program-dialog/program-dialog.component";
+import {MatDialog} from '@angular/material/dialog';
+import {ProgramDialogComponent} from '../program-dialog/program-dialog.component';
 
 const moment = _rollupMoment || _moment;
 
@@ -144,6 +144,6 @@ export class MeetingProgramComponent implements OnInit, OnChanges {
 
   showProgram(week: MeetingProgramWeekDto): void {
     const w = moment(week.dateFrom).year() + '/' + moment(week.dateFrom).week();
-    this.dialog.open(ProgramDialogComponent, {minWidth: '640px', minHeight: '80vh', data: {week: w}});
+    this.dialog.open(ProgramDialogComponent, {panelClass: 'program-dialog', data: {week: w}});
   }
 }
