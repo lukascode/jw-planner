@@ -56,7 +56,8 @@
           </mat-select>
         </mat-form-field>
       </span>
-          <button class="show-program-button no-print" (click)="showProgram(w)" mat-icon-button aria-label="Show program">
+          <button class="show-program-button no-print" (click)="showProgram(w)" mat-icon-button
+                  aria-label="Show program">
             <mat-icon>remove_red_eye</mat-icon>
           </button>
         </td>
@@ -67,7 +68,7 @@
         <td><b>CHRZEŚCIJAŃSKI TRYB ŻYCIA</b></td>
       </tr>
 
-      <tr class="ministry" *ngFor="let item of [].constructor(w.rows); let i = index">
+      <tr class="ministry" *ngFor="let item of [].constructor(w.rows); let i = index;">
         <td>
           {{w.treasureTopics![i]?.topic}}<br>
           <span *ngIf="!editMode">
@@ -115,10 +116,11 @@
       </span>
         </td>
         <td>
-          {{w.livingAsChristianTopics![i]?.topic}}<br>
+          {{w.livingAsChristianTopics![i]?.topic}}<br><br>
+          <span *ngIf="i === (w.livingAsChristianTopics!.length - 1)">Przewodniczący<br></span>
           <span *ngIf="!editMode">
-        <b>{{w.livingAsChristianTopics![i]?.assignedPerson}}</b>
-      </span>
+            <b>{{w.livingAsChristianTopics![i]?.assignedPerson}}</b>
+          </span>
           <span *ngIf="editMode && w.livingAsChristianTopics![i]">
         <mat-form-field>
           <mat-select [value]="w.livingAsChristianTopics![i]?.assignedPerson"
@@ -130,6 +132,24 @@
           </mat-select>
         </mat-form-field>
       </span>
+          <span *ngIf="i === (w.livingAsChristianTopics!.length - 1) && !editMode">
+            <br>
+            Lektor:
+            <b>{{w.livingAsChristianTopics![i]?.helper}}</b>
+          </span>
+          <span *ngIf="editMode && w.livingAsChristianTopics![i] && i === (w.livingAsChristianTopics!.length - 1)">
+            <br>
+            Lektor:
+            <mat-form-field>
+              <mat-select [value]="w.livingAsChristianTopics![i]?.helper"
+                          (selectionChange)="valueChanged($event, w.livingAsChristianTopics![i], 'helper')">
+                <mat-option *ngFor="let member of getMembers('LEKTOR')"
+                            [value]="member.firstName + ' ' + member.lastName">
+                  {{member.firstName + ' ' + member.lastName}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </span>
         </td>
       </tr>
 

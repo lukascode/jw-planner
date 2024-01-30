@@ -51,7 +51,7 @@ export class GroupsComponent implements OnInit {
   }
 
   private openSaveDialog(id?: number) {
-    const dialogRef = this.dialog.open(GroupSaveDialogComponent, {minWidth: '480px', data: {groupId: id}});
+    const dialogRef = this.dialog.open(GroupSaveDialogComponent, {panelClass: 'group-save-dialog', data: {groupId: id}});
     dialogRef.afterClosed().subscribe(groupId => {
       console.log('GroupSaveDialog closed', groupId);
       this.fetchData();

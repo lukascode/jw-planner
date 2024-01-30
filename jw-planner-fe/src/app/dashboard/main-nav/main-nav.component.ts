@@ -25,7 +25,7 @@ export class MainNavComponent implements AfterViewChecked {
       const userDetails = JSON.parse(localStorage.getItem('userDetails') as string);
       this.email = userDetails.email;
       this.appVersion = environment.appVersion;
-      console.log('version', this.appVersion);
+      console.log('version', this.appVersion, userDetails.appVersion);
       this.setThemeMode(userDetails.darkMode);
   }
 

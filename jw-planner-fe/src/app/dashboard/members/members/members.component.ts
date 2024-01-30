@@ -55,7 +55,7 @@ export class MembersComponent implements OnInit {
   }
 
   private openSaveDialog(id?: number) {
-    const dialogRef = this.dialog.open(MemberSaveDialogComponent, {minWidth: '720px', data: {memberId: id}});
+    const dialogRef = this.dialog.open(MemberSaveDialogComponent, {panelClass: 'member-save-dialog', data: {memberId: id}});
     dialogRef.afterClosed().subscribe(memberId => {
       console.log('MemberSaveDialog closed', memberId);
       this.fetchData();

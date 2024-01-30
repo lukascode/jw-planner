@@ -23,7 +23,7 @@
     </div>
 
     <ng-template #navigation>
-      <mat-nav-list>
+      <mat-nav-list (click)="toggleMobileNav()">
         <a mat-list-item routerLink="home">Wykłady</a>
         <a mat-list-item routerLink="members">Uczestnicy</a>
         <a mat-list-item routerLink="groups">Grupy</a>

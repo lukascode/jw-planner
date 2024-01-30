@@ -14,8 +14,16 @@ body {
   min-height: 80vh;
 }
 
+.member-save-dialog {
+  min-width: 720px;
+}
+
+.group-save-dialog {
+  min-width: 480px;
+}
+
 @media (max-width: 640px) {
-  .program-dialog {
+  .program-dialog, .member-save-dialog, .group-save-dialog {
     min-width: 80vw;
   }
 }
