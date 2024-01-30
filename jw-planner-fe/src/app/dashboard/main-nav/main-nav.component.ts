@@ -1,5 +1,4 @@
 import {AfterViewChecked, ChangeDetectorRef, Component, Renderer2} from '@angular/core';
-import {animate, style, transition, trigger} from '@angular/animations';
 import { AuthService } from 'src/app/security/auth.service';
 import { Router } from '@angular/router';
 import {environment} from '../../../environments/environment';
@@ -7,21 +6,7 @@ import {environment} from '../../../environments/environment';
 @Component({
   selector: 'app-main-nav',
   templateUrl: './main-nav.component.html',
-  styleUrls: ['./main-nav.component.scss'],
-  animations: [
-    trigger('mobileNavInOut', [
-      transition(':enter', [
-        style({ 'max-height': 0 }),
-        animate('500ms ease',
-          style({ 'max-height': '100%'}))
-      ]),
-      transition(':leave', [
-        style({ 'max-height': '100%' }),
-        animate('500ms ease',
-          style({ 'max-height': 0 }))
-      ])
-    ])
-  ]
+  styleUrls: ['./main-nav.component.scss']
 })
 export class MainNavComponent implements AfterViewChecked {
 
@@ -40,21 +25,22 @@ export class MainNavComponent implements AfterViewChecked {
       const userDetails = JSON.parse(localStorage.getItem('userDetails') as string);
       this.email = userDetails.email;
       this.appVersion = environment.appVersion;
+      console.log('version', this.appVersion);
       this.setThemeMode(userDetails.darkMode);
   }
 
-  ngAfterViewChecked() {
+  ngAfterViewChecked(): void {
     if (this.mediaQuery.matches) {
       this.mobileNavHidden = true;
       this.cdr.detectChanges();
     }
   }
 
-  toggleMobileNav() {
+  toggleMobileNav(): void {
     this.mobileNavHidden = !this.mobileNavHidden;
   }
 
-  toggleDarkMode() {
+  toggleDarkMode(): void {
     this.auth.switchThemeMode().subscribe(dark => {
       const userDetails = JSON.parse(localStorage.getItem('userDetails') as string);
       userDetails.darkMode = dark;
@@ -62,14 +48,14 @@ export class MainNavComponent implements AfterViewChecked {
     });
   }
 
-  logout() {
+  logout(): void {
     this.auth.logout().subscribe(() => {
       console.log('Logged out successfully');
       this.router.navigate(['/public/login']);
     });
   }
 
-  private setThemeMode(dark: boolean) {
+  private setThemeMode(dark: boolean): void {
     const clazz = 'dark-mode';
     if (dark) {
       this.renderer.addClass(document.body, clazz);

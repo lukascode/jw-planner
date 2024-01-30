@@ -9,7 +9,6 @@
         <button fxHide [fxShow.lt-md]="true" mat-icon-button class="toggle-nav-button" (click)="toggleMobileNav()">
           <mat-icon>{{ mobileNavHidden ? 'menu' : 'close' }}</mat-icon>
         </button>
-        <button mat-button>v{{appVersion }}</button>
         <button mat-icon-button aria-label="Night mode" (click)="toggleDarkMode()">
           <mat-icon>mode_night</mat-icon>
         </button>
@@ -18,7 +17,6 @@
           {{ email }}
         </button>
         <mat-menu #userProfileMenu="matMenu">
-          <!--<button mat-menu-item>Ustawienia</button>-->
           <button mat-menu-item (click)="logout()">Wyloguj</button>
         </mat-menu>
       </mat-toolbar>
@@ -35,7 +33,7 @@
       </mat-nav-list>
     </ng-template>
 
-    <div *ngIf="!mobileNavHidden" fxHide [fxShow.lt-md]="true" [ngClass.lt-md]="'mobile-navigation'" [@mobileNavInOut]>
+    <div *ngIf="!mobileNavHidden" fxHide [fxShow.lt-md]="true" [ngClass.lt-md]="'mobile-navigation'">
       <ng-container *ngTemplateOutlet="navigation"></ng-container>
     </div>
 

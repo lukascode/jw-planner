@@ -77,7 +77,7 @@
         <mat-form-field>
           <mat-select [value]="w.treasureTopics![i]?.assignedPerson"
                       (selectionChange)="valueChanged($event, w.treasureTopics![i], 'assignedPerson')">
-            <mat-option *ngFor="let member of getMembers('STARSZY', 'SLUGA')"
+            <mat-option *ngFor="let member of getMembers('STARSZY', 'SLUGA', 'PUNKTY')"
                         [value]="member.firstName + ' ' + member.lastName">
               {{member.firstName + ' ' + member.lastName}}
             </mat-option>

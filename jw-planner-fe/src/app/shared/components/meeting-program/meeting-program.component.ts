@@ -1,6 +1,6 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {MeetingProgramService} from '../../../dashboard/meeting-plan/meeting-program.service';
-import {MemberSnapshot} from '../../../dashboard/members/members.model';
+import {Gender, MemberSnapshot} from '../../../dashboard/members/members.model';
 import {AlertService} from 'ngx-alerts';
 import {MemberService} from '../../../dashboard/members/members.service';
 import {finalize, map} from 'rxjs/operators';
@@ -126,14 +126,24 @@ export class MeetingProgramComponent implements OnInit, OnChanges {
 
   getMembers(...roles: string[]): MemberSnapshot[] {
     if (roles && roles.length > 0) {
-      return this.members.filter(m => m.responsibilities.map(r => r.split(':')[0]).some(r => roles.includes(r)));
+      return this.members
+        .filter(m => m.responsibilities
+          .map(r => r.split(':')[0])
+          .some(r => roles.includes(r)))
+          .sort((m1, m2) => {
+            if (Gender.MALE === m1.gender && Gender.MALE === m2.gender) {
+              return 0;
+            } else if (Gender.MALE === m1.gender) {
+              return -1;
+            }
+            return 1;
+          });
     }
     return this.members;
   }
 
   showProgram(week: MeetingProgramWeekDto): void {
     const w = moment(week.dateFrom).year() + '/' + moment(week.dateFrom).week();
-    console.log(w);
     this.dialog.open(ProgramDialogComponent, {minWidth: '480px', data: {week: w}});
   }
 }

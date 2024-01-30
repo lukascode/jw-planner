@@ -4,6 +4,7 @@ public enum Responsibility {
     STARSZY("Starszy"),
     SLUGA("Sługa"),
     MOWCA("Mówca"),
+    LEKTOR("Lektor"),
     PORZADKOWY("Porządkowy"),
     PORZADKOWY_ZOOM("Porządkowy Zoom"),
     PORZADKOWY_SALA("Porządkowy Sala"),

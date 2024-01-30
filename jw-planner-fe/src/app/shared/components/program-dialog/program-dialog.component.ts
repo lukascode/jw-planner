@@ -1,6 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'app-program-dialog',
@@ -20,7 +21,7 @@ export class ProgramDialogComponent implements OnInit {
   }
 
   iframeSrc(): SafeUrl {
-    const url = 'https://wol.jw.org/pl/wol/meetings/r12/lp-p/' + this.week;
+    const url = environment.jwUrl + '/' + this.week;
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 }
