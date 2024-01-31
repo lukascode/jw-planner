@@ -117,7 +117,7 @@
         </td>
         <td>
           {{w.livingAsChristianTopics![i]?.topic}}<br><br>
-          <span *ngIf="i === (w.livingAsChristianTopics!.length - 1)">Przewodniczący<br></span>
+          <span *ngIf="i === (w.livingAsChristianTopics!.length - 1)">Przewodniczący <span *ngIf="!editMode"><br></span></span>
           <span *ngIf="!editMode">
             <b>{{w.livingAsChristianTopics![i]?.assignedPerson}}</b>
           </span>
