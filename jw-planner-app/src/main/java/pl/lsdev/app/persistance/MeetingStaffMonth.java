@@ -46,7 +46,8 @@ public class MeetingStaffMonth {
                         .zoomKeeper(w.getZoomKeeper())
                         .hallKeeper(w.getHallKeeper())
                         .cleaning(w.getCleaning())
-                        .parking(w.getParking())
+                        .parking1(w.getParking1())
+                        .parking2(w.getParking2())
                         .build()).toList())
                 .build();
     }

@@ -29,5 +29,7 @@ public class MeetingStaffWeekDto {
     @NotBlank
     String cleaning;
     @NotBlank
-    String parking;
+    String parking1;
+    @NotBlank
+    String parking2;
 }

@@ -14,6 +14,7 @@ import {
 import {MatSelectChange} from '@angular/material/select';
 import {MatDialog} from '@angular/material/dialog';
 import {ProgramDialogComponent} from '../program-dialog/program-dialog.component';
+import {Utils} from '../../utils/utils';
 
 const moment = _rollupMoment || _moment;
 
@@ -125,21 +126,7 @@ export class MeetingProgramComponent implements OnInit, OnChanges {
   }
 
   getMembers(...roles: string[]): MemberSnapshot[] {
-    if (roles && roles.length > 0) {
-      return this.members
-        .filter(m => m.responsibilities
-          .map(r => r.split(':')[0])
-          .some(r => roles.includes(r)))
-          .sort((m1, m2) => {
-            if (Gender.MALE === m1.gender && Gender.MALE === m2.gender) {
-              return 0;
-            } else if (Gender.MALE === m1.gender) {
-              return -1;
-            }
-            return 1;
-          });
-    }
-    return this.members;
+    return Utils.getMembers(this.members, roles);
   }
 
   showProgram(week: MeetingProgramWeekDto): void {

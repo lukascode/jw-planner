@@ -16,7 +16,8 @@ export interface WeekDto {
   zoomKeeper: string;
   hallKeeper: string;
   cleaning: string;
-  parking: string;
+  parking1: string;
+  parking2: string;
 }
 
 export interface MeetingStaffSaveRequest {

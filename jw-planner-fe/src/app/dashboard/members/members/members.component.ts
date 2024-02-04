@@ -6,6 +6,7 @@ import {BehaviorSubject, Subject} from 'rxjs';
 import {MemberService} from '../members.service';
 import {WarnDialogComponent} from '../../../shared/components/warn-dialog/warn-dialog.component';
 import {AlertService} from 'ngx-alerts';
+import {Utils} from '../../../shared/utils/utils';
 
 @Component({
   selector: 'app-members',
@@ -50,7 +51,7 @@ export class MembersComponent implements OnInit {
 
   private fetchData() {
     this.memberService.getAllMembers().subscribe(result => {
-      this.members.next(result.filter(m => !m.external));
+      this.members.next(Utils.getMembers(result.filter(m => !m.external), []));
     });
   }
 

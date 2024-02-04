@@ -46,6 +46,9 @@ public class MeetingStaffWeek {
     private String cleaning;
 
     @Column(nullable = false)
-    private String parking;
+    private String parking1;
+
+    @Column(nullable = false)
+    private String parking2;
 
 }

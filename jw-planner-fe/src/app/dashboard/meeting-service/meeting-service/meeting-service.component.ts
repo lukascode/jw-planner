@@ -13,6 +13,7 @@ import {MatSelectChange} from '@angular/material/select';
 import {AlertService} from 'ngx-alerts';
 import {HttpErrorResponse} from '@angular/common/http';
 import {of} from 'rxjs';
+import {Utils} from '../../../shared/utils/utils';
 
 const moment = _rollupMoment || _moment;
 
@@ -33,7 +34,8 @@ export class MeetingServiceComponent implements OnInit {
     'keeper',
     'zoomKeeper',
     'hallKeeper',
-    'parking',
+    'parking1',
+    'parking2',
     'cleaning'
   ];
   scheduleId: number | null;
@@ -157,6 +159,6 @@ export class MeetingServiceComponent implements OnInit {
   }
 
   getMembers(role: string): MemberSnapshot[] {
-    return this.members.filter(m => m.responsibilities.map(r => r.split(':')[0]).includes(role));
+    return Utils.getMembers(this.members, [role]);
   }
 }

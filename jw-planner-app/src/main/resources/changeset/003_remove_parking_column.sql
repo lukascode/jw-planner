@@ -1,0 +1,1 @@
+alter table jw_meeting_staff_week drop column parking;

@@ -17,6 +17,6 @@ public class LectureService {
     private final LectureRepository lectureRepository;
 
     public List<LectureSnapshot> getLectures() {
-        return lectureRepository.findAll().stream().map(Lecture::toSnapshot).toList();
+        return lectureRepository.findAllByOrderByLectureNumberAsc().stream().map(Lecture::toSnapshot).toList();
     }
 }

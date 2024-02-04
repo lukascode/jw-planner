@@ -42,7 +42,8 @@
     "keeper": "Porządkowy",
     "zoomKeeper": "Porządkowy (Zoom)",
     "hallKeeper": "Porządkowy (Sala)",
-    "parking": "Parking",
+    "parking1": "Parking w tygodniu",
+    "parking2": "Parking w niedzielę",
     "cleaning": "Sprzątanie",
     "print": "Drukuj",
     "close": "Zamknij"
