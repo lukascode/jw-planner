@@ -5,6 +5,8 @@
 
 <app-month-picker (monthEvent)="monthChosen($event)" [monthInput]="currentMonth" [arrowsDisabled]="processing"></app-month-picker>
 
+<mat-spinner *ngIf="processing" diameter="45"></mat-spinner>
+
 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="0.5em" class="no-print">
   <button mat-raised-button (click)="edit()" color="accent" *ngIf="!editMode">{{ 'edit' | translate}}</button>
   <button mat-raised-button (click)="save()" color="primary" *ngIf="editMode">{{ 'save' | translate}}</button>

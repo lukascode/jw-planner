@@ -2,6 +2,8 @@
 
 <div style="margin:1em"></div>
 
+<mat-spinner *ngIf="processing" diameter="45"></mat-spinner>
+
 <mat-table [dataSource]="members" class="mat-elevation-z1">
 
   <ng-container matColumnDef="name">

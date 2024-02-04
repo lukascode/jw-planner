@@ -6,6 +6,7 @@ import {MemberService} from '../../members/members.service';
 import {AlertService} from 'ngx-alerts';
 import {WarnDialogComponent} from '../../../shared/components/warn-dialog/warn-dialog.component';
 import {MemberSaveDialogComponent} from '../../members/member-save-dialog/member-save-dialog.component';
+import {Utils} from '../../../shared/utils/utils';
 
 @Component({
   selector: 'app-lecturers',
@@ -16,6 +17,7 @@ export class LecturersComponent implements OnInit {
 
   displayedColumns: string[] = ['name', 'email', 'phoneNumber', 'external', 'actions'];
   members: Subject<MemberSnapshot[]> = new BehaviorSubject<MemberSnapshot[]>([]);
+  processing = false;
 
   constructor(public dialog: MatDialog,
               private memberService: MemberService,
@@ -45,8 +47,10 @@ export class LecturersComponent implements OnInit {
   }
 
   private fetchData() {
+    this.processing = true;
     this.memberService.getMembers(['MOWCA']).subscribe(result => {
-      this.members.next(result);
+      this.members.next(Utils.getMembers(result, []));
+      this.processing = false;
     });
   }
 

@@ -1,3 +1,10 @@
+#staff-container {
+  mat-spinner {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
 mat-table {
   width: 100%;
   min-width: 1140px;

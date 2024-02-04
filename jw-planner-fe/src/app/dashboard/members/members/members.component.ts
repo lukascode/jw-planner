@@ -17,20 +17,21 @@ export class MembersComponent implements OnInit {
 
   displayedColumns: string[] = ['name', 'email', 'phoneNumber', 'responsibilities', 'actions'];
   members: Subject<MemberSnapshot[]> = new BehaviorSubject<MemberSnapshot[]>([]);
+  processing = false;
 
   constructor(public dialog: MatDialog,
               private memberService: MemberService,
               private alert: AlertService) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.fetchData();
   }
 
-  add() {
+  add(): void {
     this.openSaveDialog();
   }
 
-  edit(id: number) {
+  edit(id: number): void {
     this.openSaveDialog(id);
   }
 
@@ -49,13 +50,15 @@ export class MembersComponent implements OnInit {
     return responsibilities.map(r => r.split(':')[1]);
   }
 
-  private fetchData() {
+  private fetchData(): void {
+    this.processing = true;
     this.memberService.getAllMembers().subscribe(result => {
       this.members.next(Utils.getMembers(result.filter(m => !m.external), []));
+      this.processing = false;
     });
   }
 
-  private openSaveDialog(id?: number) {
+  private openSaveDialog(id?: number): void {
     const dialogRef = this.dialog.open(MemberSaveDialogComponent, {panelClass: 'member-save-dialog', data: {memberId: id}});
     dialogRef.afterClosed().subscribe(memberId => {
       console.log('MemberSaveDialog closed', memberId);
