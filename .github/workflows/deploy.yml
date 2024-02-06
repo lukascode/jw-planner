@@ -16,4 +16,6 @@ jobs:
         run: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
       - name: Source nvm
         run: source "$HOME/.nvm/nvm.sh"
+      - name: Check nvm version
+        run: nvm --version
       
