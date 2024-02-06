@@ -15,5 +15,5 @@ jobs:
       - name: Install nvm
         run: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
       - name: Install nvm 2
-        run: bash NVM_DIR="$HOME/.nvm/nvm.sh" --version
+        run: bash "$HOME/.nvm/nvm.sh" --version
       
