@@ -13,13 +13,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: 12
+      - name: Set up nvm
+        run: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build FE
-        run: npm run build --prod
+      - name: Check version
+        run: nvm --version
