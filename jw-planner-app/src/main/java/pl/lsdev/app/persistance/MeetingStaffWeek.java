@@ -24,31 +24,13 @@ public class MeetingStaffWeek {
     @Column(nullable = false)
     private LocalDate dateTo;
 
-    @Column(nullable = false)
     private String avMixer;
-
-    @Column(nullable = false)
     private String avMicrophone;
-
-    @Column(nullable = false)
     private String avStageMicrophone;
-
-    @Column(nullable = false)
     private String keeper;
-
-    @Column(nullable = false)
     private String zoomKeeper;
-
-    @Column(nullable = false)
     private String hallKeeper;
-
-    @Column(nullable = false)
     private String cleaning;
-
-    @Column(nullable = false)
     private String parking1;
-
-    @Column(nullable = false)
     private String parking2;
-
 }

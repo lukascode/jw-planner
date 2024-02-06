@@ -1,0 +1,9 @@
+alter table jw_meeting_staff_week modify column av_mixer varchar(255);
+alter table jw_meeting_staff_week modify column av_microphone varchar(255);
+alter table jw_meeting_staff_week modify column av_stage_microphone varchar(255);
+alter table jw_meeting_staff_week modify column keeper varchar(255);
+alter table jw_meeting_staff_week modify column zoom_keeper varchar(255);
+alter table jw_meeting_staff_week modify column hall_keeper varchar(255);
+alter table jw_meeting_staff_week modify column cleaning varchar(255);
+alter table jw_meeting_staff_week modify column parking1 varchar(255);
+alter table jw_meeting_staff_week modify column parking2 varchar(255);

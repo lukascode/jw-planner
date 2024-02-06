@@ -8,7 +8,7 @@
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="0.5em" class="no-print">
       <button mat-raised-button (click)="edit()" color="accent" *ngIf="!editMode">{{ 'edit' | translate}}</button>
       <button mat-raised-button (click)="save()" color="primary" *ngIf="editMode">{{ 'save' | translate}}</button>
-      <button mat-raised-button (click)="cancel()" color="accent" *ngIf="editMode">{{ 'cancel' | translate}}</button>
+      <button mat-raised-button (click)="cancel()" color="accent" *ngIf="editMode && programStatus !== 'INITIAL'">{{ 'cancel' | translate}}</button>
       <button mat-raised-button (click)="print()" color="primary" *ngIf="!editMode">{{ 'print' | translate }}</button>
     </div>
 

@@ -82,37 +82,50 @@ export class MeetingServiceComponent implements OnInit {
   private fetchSchedule(): void {
     console.log('fetchSchedule...', this.currentMonth);
     this.processing = true;
+    this.editMode = false;
     this.scheduleId = null;
-    this.staff.getScheduleSnapshot(this.currentMonth.replace('/', '-')).pipe(map(s => {
-      this.scheduleId = s.id;
-      for (const week of s.weeks) {
-        const dateFrom = moment(week.dateFrom).format('DD MMMM');
-        const dateTo = moment(week.dateTo).format('DD MMMM');
-        week.week = dateFrom + ' - ' + dateTo;
+    const scheduleFromBackup = localStorage.getItem('schedule/' + this.currentMonth);
+    const shId = localStorage.getItem('schedule/' + this.currentMonth + '/id');
+    if (scheduleFromBackup) {
+      this.weeks = JSON.parse(scheduleFromBackup);
+      this.originalWeeks = JSON.parse(JSON.stringify(this.weeks));
+      this.editMode = true;
+      if (shId) {
+        this.scheduleId = +shId;
       }
-      return s.weeks;
-    }), catchError((err: HttpErrorResponse) => {
-      if (err.status === 404) {
-        return this.staff
-          .getWeeks(this.currentMonth.replace('/', '-'))
-          .pipe(
-            map(weeks => {
-              for (const week of weeks) {
-                const dateFrom = moment(week.dateFrom).format('DD MMMM');
-                const dateTo = moment(week.dateTo).format('DD MMMM');
-                week.week = dateFrom + ' - ' + dateTo;
-              }
-              this.editMode = true;
-              return weeks;
-            })
-          );
-      }
-      this.alert.danger(err.message);
-      return of([]);
-    }), finalize(() => this.processing = false)).subscribe(weeks => {
-      this.originalWeeks = JSON.parse(JSON.stringify(weeks));
-      this.weeks = weeks as WeekDto[];
-    });
+      this.processing = false;
+    } else {
+      this.staff.getScheduleSnapshot(this.currentMonth.replace('/', '-')).pipe(map(s => {
+        this.scheduleId = s.id;
+        for (const week of s.weeks) {
+          const dateFrom = moment(week.dateFrom).format('DD MMMM');
+          const dateTo = moment(week.dateTo).format('DD MMMM');
+          week.week = dateFrom + ' - ' + dateTo;
+        }
+        return s.weeks;
+      }), catchError((err: HttpErrorResponse) => {
+        if (err.status === 404) {
+          return this.staff
+            .getWeeks(this.currentMonth.replace('/', '-'))
+            .pipe(
+              map(weeks => {
+                for (const week of weeks) {
+                  const dateFrom = moment(week.dateFrom).format('DD MMMM');
+                  const dateTo = moment(week.dateTo).format('DD MMMM');
+                  week.week = dateFrom + ' - ' + dateTo;
+                }
+                this.editMode = true;
+                return weeks;
+              })
+            );
+        }
+        this.alert.danger(err.message);
+        return of([]);
+      }), finalize(() => this.processing = false)).subscribe(weeks => {
+        this.originalWeeks = JSON.parse(JSON.stringify(weeks));
+        this.weeks = weeks as WeekDto[];
+      });
+    }
   }
 
   edit(): void {
@@ -120,8 +133,6 @@ export class MeetingServiceComponent implements OnInit {
   }
 
   save(): void {
-    const emptySize = document.body.getElementsByClassName('mat-select-empty').length;
-    if (this.touched && emptySize === 0) {
       this.staff.saveSchedule({
         month: this.currentMonth.replace('/', '-'),
         weeks: this.weeks
@@ -130,23 +141,23 @@ export class MeetingServiceComponent implements OnInit {
         this.originalWeeks = JSON.parse(JSON.stringify(this.weeks));
         this.editMode = false;
         this.touched = false;
+        localStorage.removeItem('schedule/' + this.currentMonth);
+        localStorage.removeItem('schedule/' + this.currentMonth + '/id');
         this.alert.success('Zapisano pomyślnie');
       });
-    } else if (emptySize > 0) {
-      this.alert.warning('Wypełnij wszystkie pola');
-    } else {
-      this.editMode = false;
-    }
   }
 
   cancel(): void {
     this.weeks = JSON.parse(JSON.stringify(this.originalWeeks));
     this.editMode = false;
     this.touched = false;
+    localStorage.removeItem('schedule/' + this.currentMonth);
+    localStorage.removeItem('schedule/' + this.currentMonth + '/id');
+    this.fetchSchedule();
   }
 
   get cancelVisible(): boolean {
-    return this.editMode && document.body.getElementsByClassName('mat-select-empty').length === 0;
+    return this.editMode;
   }
 
   print(): void {
@@ -156,9 +167,17 @@ export class MeetingServiceComponent implements OnInit {
   memberChanged(event: MatSelectChange, week: WeekDto, attribute: string): void {
     (week as any)[attribute] = event.value;
     this.touched = true;
+    this.backup();
   }
 
   getMembers(role: string): MemberSnapshot[] {
     return Utils.getMembers(this.members, [role]);
+  }
+
+  private backup(): void {
+    localStorage.setItem('schedule/' + this.currentMonth, JSON.stringify(this.weeks));
+    if (this.scheduleId) {
+      localStorage.setItem('schedule/' + this.currentMonth + '/id', this.scheduleId.toString());
+    }
   }
 }

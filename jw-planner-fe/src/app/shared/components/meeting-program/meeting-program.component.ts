@@ -50,20 +50,18 @@ export class MeetingProgramComponent implements OnInit, OnChanges {
   }
 
   save(): void {
-    if (this.touched) {
-      this.meetingProgram.saveProgram({
-        month: this.month.replace('/', '-'),
-        weeks: this.weeks
-      } as MeetingProgramSaveRequest, this.programId as number).subscribe(id => {
-        this.programId = id;
-        this.originalWeeks = JSON.parse(JSON.stringify(this.weeks));
-        this.editMode = false;
-        this.touched = false;
-        this.alert.success('Zapisano pomyślnie');
-      });
-    } else {
+    this.meetingProgram.saveProgram({
+      month: this.month.replace('/', '-'),
+      weeks: this.weeks
+    } as MeetingProgramSaveRequest, this.programId as number).subscribe(id => {
+      this.programId = id;
+      this.originalWeeks = JSON.parse(JSON.stringify(this.weeks));
       this.editMode = false;
-    }
+      this.touched = false;
+      localStorage.removeItem('program/' + this.month);
+      localStorage.removeItem('program/' + this.month + '/id');
+      this.alert.success('Zapisano pomyślnie');
+    });
   }
 
   edit(): void {
@@ -74,44 +72,60 @@ export class MeetingProgramComponent implements OnInit, OnChanges {
     this.weeks = JSON.parse(JSON.stringify(this.originalWeeks));
     this.editMode = false;
     this.touched = false;
+    localStorage.removeItem('program/' + this.month);
+    localStorage.removeItem('program/' + this.month + '/id');
+    this.fetchProgram();
   }
 
-    print(): void {
+  print(): void {
     window.print();
   }
 
   private fetchProgram(): void {
     this.programId = null;
+    this.editMode = false;
     this.processing = true;
-    this.meetingProgram.getProgram(this.month.replace('/', '-')).pipe(map(p => {
-      this.programId = p.id;
-      this.programStatus = p.status;
-      this.editMode = 'INITIAL' === this.programStatus ? true : false;
-      for (const week of p.weeks) {
-        const dateFrom = moment(week.dateFrom).format('DD MMMM');
-        const dateTo = moment(week.dateTo).format('DD MMMM');
-        week.week = dateFrom + ' - ' + dateTo;
-
-        week.treasureTopics = [];
-        week.improveTopics = [];
-        week.livingAsChristianTopics = [];
-
-        for (const topic of week.topics) {
-          if ('TREASURES' === topic.section) {
-            week.treasureTopics.push(topic);
-          } else if ('IMPROVE' === topic.section) {
-            week.improveTopics.push(topic);
-          } else if ('LIVING_AS_CHRISTIANS' === topic.section) {
-            week.livingAsChristianTopics.push(topic);
-          }
-        }
-        week.rows = Math.max(week.treasureTopics.length, week.improveTopics.length, week.livingAsChristianTopics.length);
+    const programFromBackup = localStorage.getItem('program/' + this.month);
+    const pId = localStorage.getItem('program/' + this.month + '/id');
+    if (programFromBackup) {
+      this.weeks = JSON.parse(programFromBackup);
+      this.originalWeeks = JSON.parse(JSON.stringify(this.weeks));
+      this.editMode = true;
+      if (pId) {
+        this.programId = +pId;
       }
-      return p.weeks;
-    }), finalize(() => this.processing = false)).subscribe(weeks => {
-      this.originalWeeks = JSON.parse(JSON.stringify(weeks));
-      this.weeks = weeks;
-    });
+      this.processing = false;
+    } else {
+      this.meetingProgram.getProgram(this.month.replace('/', '-')).pipe(map(p => {
+        this.programId = p.id;
+        this.programStatus = p.status;
+        this.editMode = 'INITIAL' === this.programStatus ? true : false;
+        for (const week of p.weeks) {
+          const dateFrom = moment(week.dateFrom).format('DD MMMM');
+          const dateTo = moment(week.dateTo).format('DD MMMM');
+          week.week = dateFrom + ' - ' + dateTo;
+
+          week.treasureTopics = [];
+          week.improveTopics = [];
+          week.livingAsChristianTopics = [];
+
+          for (const topic of week.topics) {
+            if ('TREASURES' === topic.section) {
+              week.treasureTopics.push(topic);
+            } else if ('IMPROVE' === topic.section) {
+              week.improveTopics.push(topic);
+            } else if ('LIVING_AS_CHRISTIANS' === topic.section) {
+              week.livingAsChristianTopics.push(topic);
+            }
+          }
+          week.rows = Math.max(week.treasureTopics.length, week.improveTopics.length, week.livingAsChristianTopics.length);
+        }
+        return p.weeks;
+      }), finalize(() => this.processing = false)).subscribe(weeks => {
+        this.originalWeeks = JSON.parse(JSON.stringify(weeks));
+        this.weeks = weeks;
+      });
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -123,6 +137,7 @@ export class MeetingProgramComponent implements OnInit, OnChanges {
   valueChanged(event: MatSelectChange, obj: any, attribute: string): void {
     (obj as any)[attribute] = event.value;
     this.touched = true;
+    this.backup();
   }
 
   getMembers(...roles: string[]): MemberSnapshot[] {
@@ -132,5 +147,12 @@ export class MeetingProgramComponent implements OnInit, OnChanges {
   showProgram(week: MeetingProgramWeekDto): void {
     const w = moment(week.dateFrom).year() + '/' + moment(week.dateFrom).week();
     this.dialog.open(ProgramDialogComponent, {panelClass: 'program-dialog', data: {week: w}});
+  }
+
+  private backup(): void {
+    localStorage.setItem('program/' + this.month, JSON.stringify(this.weeks));
+    if (this.programId) {
+      localStorage.setItem('program/' + this.month + '/id', this.programId.toString());
+    }
   }
 }

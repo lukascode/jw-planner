@@ -14,22 +14,13 @@ public class MeetingStaffWeekDto {
     LocalDate dateFrom;
     @NotNull
     LocalDate dateTo;
-    @NotBlank
     String avMixer;
-    @NotBlank
     String avMicrophone;
-    @NotBlank
     String avStageMicrophone;
-    @NotBlank
     String keeper;
-    @NotBlank
     String zoomKeeper;
-    @NotBlank
     String hallKeeper;
-    @NotBlank
     String cleaning;
-    @NotBlank
     String parking1;
-    @NotBlank
     String parking2;
 }
