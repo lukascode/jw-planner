@@ -23,6 +23,7 @@ public class MeetingProgramClient {
 
     public List<Pair<MeetingSection, String>> getMeetingProgram(int year, int week) {
         try {
+            week = (2025 == year) ? week + 1 : week;
             List<Pair<MeetingSection, String>> result = new ArrayList<>();
             MeetingSection meetingSection = MeetingSection.INITIAL;
             Document doc = Jsoup.connect(String.format("%s/%d/%d", jwUrl, year, week)).get();
