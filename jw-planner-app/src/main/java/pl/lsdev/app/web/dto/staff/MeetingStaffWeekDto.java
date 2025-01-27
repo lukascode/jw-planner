@@ -1,9 +1,9 @@
 package pl.lsdev.app.web.dto.staff;
 
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Value;
+import pl.lsdev.app.persistance.MeetingStaffWeekType;
 
 import java.time.LocalDate;
 
@@ -14,6 +14,8 @@ public class MeetingStaffWeekDto {
     LocalDate dateFrom;
     @NotNull
     LocalDate dateTo;
+    @NotNull
+    MeetingStaffWeekType type;
     String avMixer;
     String avMicrophone;
     String avStageMicrophone;
@@ -21,6 +23,5 @@ public class MeetingStaffWeekDto {
     String zoomKeeper;
     String hallKeeper;
     String cleaning;
-    String parking1;
-    String parking2;
+    String parking;
 }

@@ -144,6 +144,10 @@ export class MeetingProgramComponent implements OnInit, OnChanges {
     return Utils.getMembers(this.members, roles);
   }
 
+  getMaleMembers(...roles: string[]): MemberSnapshot[] {
+    return Utils.getMembers(this.members, roles, Gender.MALE);
+  }
+
   showProgram(week: MeetingProgramWeekDto): void {
     const w = moment(week.dateFrom).year() + '/' + moment(week.dateFrom).week();
     this.dialog.open(ProgramDialogComponent, {panelClass: 'program-dialog', data: {week: w}});

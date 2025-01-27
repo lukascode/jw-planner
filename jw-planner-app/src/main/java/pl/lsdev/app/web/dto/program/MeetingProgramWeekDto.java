@@ -26,4 +26,5 @@ public class MeetingProgramWeekDto {
     String sundayLecturer;
     String prayer1;
     String prayer2;
+    String sundayLastPray;
 }

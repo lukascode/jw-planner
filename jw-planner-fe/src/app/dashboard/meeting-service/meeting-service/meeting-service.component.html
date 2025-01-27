@@ -109,26 +109,12 @@
     </mat-cell>
   </ng-container>
 
-  <ng-container matColumnDef="parking1">
-    <mat-header-cell *matHeaderCellDef>{{'parking1' | translate}}</mat-header-cell>
+  <ng-container matColumnDef="parking">
+    <mat-header-cell *matHeaderCellDef>{{'parking' | translate}}</mat-header-cell>
     <mat-cell *matCellDef="let element">
-      <ng-container *ngIf="!editMode">{{element.parking1}}</ng-container>
+      <ng-container *ngIf="!editMode">{{element.parking}}</ng-container>
       <mat-form-field *ngIf="editMode">
-        <mat-select required [value]="element.parking1" (selectionChange)="memberChanged($event, element, 'parking1')">
-          <mat-option *ngFor="let member of getMembers('PARKING')" [value]="member.firstName + ' ' + member.lastName">
-            {{member.firstName + ' ' + member.lastName}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </mat-cell>
-  </ng-container>
-
-  <ng-container matColumnDef="parking2">
-    <mat-header-cell *matHeaderCellDef>{{'parking2' | translate}}</mat-header-cell>
-    <mat-cell *matCellDef="let element">
-      <ng-container *ngIf="!editMode">{{element.parking2}}</ng-container>
-      <mat-form-field *ngIf="editMode">
-        <mat-select required [value]="element.parking2" (selectionChange)="memberChanged($event, element, 'parking2')">
+        <mat-select required [value]="element.parking" (selectionChange)="memberChanged($event, element, 'parking')">
           <mat-option *ngFor="let member of getMembers('PARKING')" [value]="member.firstName + ' ' + member.lastName">
             {{member.firstName + ' ' + member.lastName}}
           </mat-option>

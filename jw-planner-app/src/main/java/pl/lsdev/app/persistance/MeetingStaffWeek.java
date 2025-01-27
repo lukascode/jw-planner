@@ -24,6 +24,10 @@ public class MeetingStaffWeek {
     @Column(nullable = false)
     private LocalDate dateTo;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private MeetingStaffWeekType type;
+
     private String avMixer;
     private String avMicrophone;
     private String avStageMicrophone;
@@ -31,6 +35,5 @@ public class MeetingStaffWeek {
     private String zoomKeeper;
     private String hallKeeper;
     private String cleaning;
-    private String parking1;
-    private String parking2;
+    private String parking;
 }

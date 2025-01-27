@@ -19,6 +19,7 @@ export interface MeetingProgramWeekDto {
   sundayLecturer: string;
   prayer1: string;
   prayer2: string;
+  sundayLastPray: string;
 
   // only for view
   rows?: number;

@@ -59,6 +59,7 @@ public class MeetingProgramService {
                         .sundayLecturer(w.getSundayLecturer())
                         .prayer1(w.getPrayer1())
                         .prayer2(w.getPrayer2())
+                        .sundayLastPray(w.getSundayLastPray())
                         .topics(w.getTopics().stream()
                                 .map(t -> MeetingProgramWeekTopic.builder()
                                         .section(t.getSection())

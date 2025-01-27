@@ -1,0 +1,1 @@
+alter table jw_meeting_program_week add column sunday_last_pray varchar(255) NULL;

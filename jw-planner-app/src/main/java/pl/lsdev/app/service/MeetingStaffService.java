@@ -8,6 +8,7 @@ import org.springframework.util.Assert;
 import pl.lsdev.app.persistance.MeetingStaffMonth;
 import pl.lsdev.app.persistance.MeetingStaffRepository;
 import pl.lsdev.app.persistance.MeetingStaffWeek;
+import pl.lsdev.app.persistance.MeetingStaffWeekType;
 import pl.lsdev.app.util.MonthUtil;
 import pl.lsdev.app.web.dto.staff.MeetingStaffMonthSnapshot;
 import pl.lsdev.app.web.dto.staff.MeetingStaffSaveRequest;
@@ -16,6 +17,8 @@ import pl.lsdev.app.web.dto.program.WeekDto;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Slf4j
 @Service
@@ -28,7 +31,10 @@ public class MeetingStaffService {
 
     public List<WeekDto> getWeeks(YearMonth month) {
         return MonthUtil.getWeeks(month).stream()
-                .map(w -> new WeekDto(w.getLeft(), w.getRight())).toList();
+                .flatMap(w -> Stream.of(
+                        new WeekDto(w.getLeft(), w.getRight(), MeetingStaffWeekType.WEEK),
+                        new WeekDto(w.getLeft(), w.getRight(), MeetingStaffWeekType.SUNDAY)
+                )).collect(Collectors.toList());
     }
 
     @Transactional
@@ -39,7 +45,7 @@ public class MeetingStaffService {
     @Transactional
     public Long createSchedule(MeetingStaffSaveRequest request) {
         log.debug("Creating new schedule {month: {}}", request.getMonth());
-        var savedSchedule= meetingStaffRepository.save(prepareMonthSchedule(request));
+        var savedSchedule = meetingStaffRepository.save(prepareMonthSchedule(request));
         log.info("Schedule created successfully {month: {}}", request.getMonth());
         return savedSchedule.getId();
     }
@@ -52,29 +58,26 @@ public class MeetingStaffService {
         Assert.isTrue(month == schedule.getMonth(), "Bad month");
         var updatedSchedule = prepareMonthSchedule(request);
         updatedSchedule.setId(schedule.getId());
-        var savedSchedule= meetingStaffRepository.save(updatedSchedule);
+        var savedSchedule = meetingStaffRepository.save(updatedSchedule);
         log.info("Schedule updated successfully {month: {}, scheduleId: {}}", request.getMonth(), scheduleId);
         return savedSchedule.getId();
     }
 
     private MeetingStaffMonth prepareMonthSchedule(MeetingStaffSaveRequest request) {
-        if (MonthUtil.getWeeks(request.getMonth()).size() != request.getWeeks().size()) {
-            throw new IllegalArgumentException("Bad weeks");
-        }
         var weeks = request.getWeeks().stream()
                 .map(w -> MeetingStaffWeek.builder()
-                .dateFrom(w.getDateFrom())
-                .dateTo(w.getDateTo())
-                .avMixer(w.getAvMixer())
-                .avMicrophone(w.getAvMicrophone())
-                .avStageMicrophone(w.getAvStageMicrophone())
-                .keeper(w.getKeeper())
-                .zoomKeeper(w.getZoomKeeper())
-                .hallKeeper(w.getHallKeeper())
-                .cleaning(w.getCleaning())
-                .parking1(w.getParking1())
-                .parking2(w.getParking2())
-                .build()).toList();
+                        .dateFrom(w.getDateFrom())
+                        .dateTo(w.getDateTo())
+                        .type(w.getType())
+                        .avMixer(w.getAvMixer())
+                        .avMicrophone(w.getAvMicrophone())
+                        .avStageMicrophone(w.getAvStageMicrophone())
+                        .keeper(w.getKeeper())
+                        .zoomKeeper(w.getZoomKeeper())
+                        .hallKeeper(w.getHallKeeper())
+                        .cleaning(w.getCleaning())
+                        .parking(w.getParking())
+                        .build()).toList();
         return MeetingStaffMonth.builder()
                 .month(Integer.parseInt(request.getMonth().atEndOfMonth().format(MONTH_FORMATTER)))
                 .weeks(weeks)

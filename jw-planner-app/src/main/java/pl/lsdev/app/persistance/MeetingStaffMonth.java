@@ -39,6 +39,7 @@ public class MeetingStaffMonth {
                 .weeks(weeks.stream().map(w -> MeetingStaffWeekDto.builder()
                         .dateFrom(w.getDateFrom())
                         .dateTo(w.getDateTo())
+                        .type(w.getType())
                         .avMixer(w.getAvMixer())
                         .avMicrophone(w.getAvMicrophone())
                         .avStageMicrophone(w.getAvStageMicrophone())
@@ -46,8 +47,7 @@ public class MeetingStaffMonth {
                         .zoomKeeper(w.getZoomKeeper())
                         .hallKeeper(w.getHallKeeper())
                         .cleaning(w.getCleaning())
-                        .parking1(w.getParking1())
-                        .parking2(w.getParking2())
+                        .parking(w.getParking())
                         .build()).toList())
                 .build();
     }

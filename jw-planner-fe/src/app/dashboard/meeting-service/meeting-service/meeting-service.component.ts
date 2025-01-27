@@ -34,8 +34,7 @@ export class MeetingServiceComponent implements OnInit {
     'keeper',
     'zoomKeeper',
     'hallKeeper',
-    'parking1',
-    'parking2',
+    'parking',
     'cleaning'
   ];
   scheduleId: number | null;
@@ -59,7 +58,6 @@ export class MeetingServiceComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('ngOnInit...');
     const year = this.route.snapshot.paramMap.get('year');
     const month = this.route.snapshot.paramMap.get('month');
     if (year && month) {
@@ -100,7 +98,8 @@ export class MeetingServiceComponent implements OnInit {
         for (const week of s.weeks) {
           const dateFrom = moment(week.dateFrom).format('DD MMMM');
           const dateTo = moment(week.dateTo).format('DD MMMM');
-          week.week = dateFrom + ' - ' + dateTo;
+          const type = 'WEEK' === week.type ? 'W tygodniu' : 'W niedzielę';
+          week.week = dateFrom + ' - ' + dateTo + ' (' + type + ')';
         }
         return s.weeks;
       }), catchError((err: HttpErrorResponse) => {
@@ -112,7 +111,8 @@ export class MeetingServiceComponent implements OnInit {
                 for (const week of weeks) {
                   const dateFrom = moment(week.dateFrom).format('DD MMMM');
                   const dateTo = moment(week.dateTo).format('DD MMMM');
-                  week.week = dateFrom + ' - ' + dateTo;
+                  const type = 'WEEK' === week.type ? 'W tygodniu' : 'W niedzielę';
+                  week.week = dateFrom + ' - ' + dateTo + ' (' + type + ')';
                 }
                 this.editMode = true;
                 return weeks;

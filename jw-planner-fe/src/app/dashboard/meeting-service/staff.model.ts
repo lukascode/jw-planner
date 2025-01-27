@@ -3,12 +3,14 @@ export interface Week {
   week?: string;
   dateFrom: string;
   dateTo: string;
+  type: string;
 }
 
 export interface WeekDto {
   week?: string;
   dateFrom: string;
   dateTo: string;
+  type: string;
   avMixer: string;
   avMicrophone: string;
   avStageMicrophone: string;
@@ -16,8 +18,7 @@ export interface WeekDto {
   zoomKeeper: string;
   hallKeeper: string;
   cleaning: string;
-  parking1: string;
-  parking2: string;
+  parking: string;
 }
 
 export interface MeetingStaffSaveRequest {

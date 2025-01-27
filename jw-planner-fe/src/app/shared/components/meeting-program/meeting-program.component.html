@@ -8,7 +8,8 @@
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="0.5em" class="no-print">
       <button mat-raised-button (click)="edit()" color="accent" *ngIf="!editMode">{{ 'edit' | translate}}</button>
       <button mat-raised-button (click)="save()" color="primary" *ngIf="editMode">{{ 'save' | translate}}</button>
-      <button mat-raised-button (click)="cancel()" color="accent" *ngIf="editMode && programStatus !== 'INITIAL'">{{ 'cancel' | translate}}</button>
+      <button mat-raised-button (click)="cancel()" color="accent"
+              *ngIf="editMode && programStatus !== 'INITIAL'">{{ 'cancel' | translate}}</button>
       <button mat-raised-button (click)="print()" color="primary" *ngIf="!editMode">{{ 'print' | translate }}</button>
     </div>
 
@@ -36,7 +37,7 @@
           <span *ngIf="editMode">
         <mat-form-field>
           <mat-select [value]="w.prayer1" (selectionChange)="valueChanged($event, w, 'prayer1')">
-            <mat-option *ngFor="let member of getMembers('STARSZY', 'SLUGA')"
+            <mat-option *ngFor="let member of getMaleMembers()"
                         [value]="member.firstName + ' ' + member.lastName">
               {{member.firstName + ' ' + member.lastName}}
             </mat-option>
@@ -49,7 +50,7 @@
           <span *ngIf="editMode">
         <mat-form-field>
           <mat-select [value]="w.prayer2" (selectionChange)="valueChanged($event, w, 'prayer2')">
-            <mat-option *ngFor="let member of getMembers('STARSZY', 'SLUGA')"
+            <mat-option *ngFor="let member of getMaleMembers()"
                         [value]="member.firstName + ' ' + member.lastName">
               {{member.firstName + ' ' + member.lastName}}
             </mat-option>
@@ -167,7 +168,8 @@
           <span *ngIf="editMode">
         <mat-form-field>
           <mat-select [value]="w.sundayChairman" (selectionChange)="valueChanged($event, w, 'sundayChairman')">
-            <mat-option *ngFor="let member of getMembers('STARSZY')" [value]="member.firstName + ' ' + member.lastName">
+            <mat-option *ngFor="let member of getMembers('STARSZY', 'SLUGA')"
+                        [value]="member.firstName + ' ' + member.lastName">
               {{member.firstName + ' ' + member.lastName}}
             </mat-option>
           </mat-select>
@@ -191,13 +193,27 @@
         <td>
           Wykład:
           <span *ngIf="!editMode">
-        <em>{{w.sundayLectureTitle}}</em>
+            {{w.sundayLectureTitle}}
       </span>
           <span *ngIf="editMode">
         <mat-form-field>
           <mat-select [value]="w.sundayLectureTitle" (selectionChange)="valueChanged($event, w, 'sundayLectureTitle')">
             <mat-option *ngFor="let l of lectures" [value]="l.lectureTitle">
               {{+l.lectureNumber + ' ' + l.lectureTitle}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </span>
+          <br>
+          Modlitwa końcowa:
+          <span *ngIf="!editMode">
+        {{w.sundayLastPray}}
+      </span>
+          <span *ngIf="editMode">
+        <mat-form-field>
+          <mat-select [value]="w.sundayLastPray" (selectionChange)="valueChanged($event, w, 'sundayLastPray')">
+            <mat-option *ngFor="let member of getMaleMembers()" [value]="member.firstName + ' ' + member.lastName">
+              {{member.firstName + ' ' + member.lastName}}
             </mat-option>
           </mat-select>
         </mat-form-field>

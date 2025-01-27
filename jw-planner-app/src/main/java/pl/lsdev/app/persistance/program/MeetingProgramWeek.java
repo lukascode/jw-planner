@@ -37,4 +37,5 @@ public class MeetingProgramWeek {
     private String sundayLecturer;
     private String prayer1;
     private String prayer2;
+    private String sundayLastPray;
 }
