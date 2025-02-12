@@ -1,5 +1,7 @@
 package pl.lsdev.app.service.program;
 
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -11,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+@Slf4j
 @Service
 public class MeetingProgramClient {
 
@@ -42,7 +45,9 @@ public class MeetingProgramClient {
             }
             return result;
         } catch (Exception e) {
-            throw new RuntimeException("Unable to fetch meeting program");
+            log.error("Unable to fetch meeting program", e);
+            throw new RuntimeException("Unable to fetch meeting program {year: %d, week: %d}, stackTrace: %s"
+                    .formatted(year, week, ExceptionUtils.getStackTrace(e)), e);
         }
     }
 }
