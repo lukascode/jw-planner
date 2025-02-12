@@ -17,6 +17,8 @@ import java.util.regex.Pattern;
 @Service
 public class MeetingProgramClient {
 
+    private static final String USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36";
+    private static final int TIMEOUT = 30000;
     private static final Pattern STARTS_WITH_NUMBER_PATTERN = Pattern.compile("^\\d+\\..*");
     private final String jwUrl;
 
@@ -29,7 +31,8 @@ public class MeetingProgramClient {
             week = (2025 == year) ? week + 1 : week;
             List<Pair<MeetingSection, String>> result = new ArrayList<>();
             MeetingSection meetingSection = MeetingSection.INITIAL;
-            Document doc = Jsoup.connect(String.format("%s/%d/%d", jwUrl, year, week)).get();
+            Document doc = Jsoup.connect(String.format("%s/%d/%d", jwUrl, year, week))
+                    .userAgent(USER_AGENT).timeout(TIMEOUT).get();
             var elements = doc.select("h2,h3");
             for (var el : elements) {
                 String txt = el.text();
