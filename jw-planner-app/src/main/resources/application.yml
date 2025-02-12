@@ -1,5 +1,5 @@
 app:
-  version: 1.2.2-rc
+  version: 1.2.3-rc
 
 server:
   port: 8081
