@@ -1,5 +1,5 @@
 app:
-  version: 1.2.3-rc
+  version: 1.2.4-rc
 
 server:
   port: 8081
@@ -38,4 +38,4 @@ logging:
           web: TRACE
 
 jw:
-  url: https://wol.jw.org/pl/wol/meetings/r12/lp-p
+  url: https://proxy.jw-planner.ovh/pl/wol/meetings/r12/lp-p
