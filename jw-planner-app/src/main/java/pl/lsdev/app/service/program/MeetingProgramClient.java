@@ -34,7 +34,7 @@ public class MeetingProgramClient {
             Document doc = Jsoup.connect(String.format("%s/%d/%d", jwUrl, year, week))
                     .userAgent(USER_AGENT).header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
                     .timeout(TIMEOUT).get();
-            var elements = doc.select("h2,h3");
+            var elements = doc.select("h2,h3,strong");
             for (var el : elements) {
                 String txt = el.text();
                 if (txt.startsWith(MeetingSection.TREASURES.txt)) {
@@ -47,7 +47,8 @@ public class MeetingProgramClient {
                     result.add(Pair.of(meetingSection, txt));
                 }
             }
-            return result;
+            return result.stream()
+                    .distinct().toList();
         } catch (Exception e) {
             log.error("Unable to fetch meeting program", e);
             throw new RuntimeException("Unable to fetch meeting program {year: %d, week: %d}, stackTrace: %s"
